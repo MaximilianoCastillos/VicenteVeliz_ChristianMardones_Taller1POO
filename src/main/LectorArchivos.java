@@ -15,7 +15,7 @@ public class LectorArchivos {
 				System.out.println(linea);
 				
 			}
-			
+		lector.close();	
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
@@ -33,8 +33,46 @@ public class LectorArchivos {
 				
 				
 			}
+		lector.close();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
 	}
+	
+	public void LeePrediciones() {
+		try {
+			File archivosExperimento = new File("archivos/predicciones.txt");
+			Scanner lector = new Scanner(archivosExperimento);
+			
+			while (lector.hasNextLine()) {
+				
+				String linea = lector.nextLine();
+				System.out.println(linea);
+				
+			}
+		lector.close();	
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	public void LeerVerificaciones() {
+		try {
+			File archivosVerificaciones = new File("archivos/verificacion_docente_confusiones.csv");
+			Scanner lector = new Scanner(archivosVerificaciones);
+			
+			while (lector.hasNextLine()) {
+				
+				String linea = lector.nextLine();
+				System.out.println(linea);
+				
+			}
+		lector.close();	
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			
+		}
+		
+	}
 }
+
