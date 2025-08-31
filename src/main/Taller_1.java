@@ -6,9 +6,21 @@ import java.util.Scanner;
 public class Taller_1 {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		File experimentos = new File("archivos/experimentos.txt");
-		Scanner sc = new Scanner(experimentos);
+		try {
+			File archivosExperimento = new File("archivos/experimentos.txt");
+			Scanner lector = new Scanner(archivosExperimento);
+			
+			while (lector.hasNextLine()) {
+				
+				String linea = lector.nextLine();
+				System.out.println(linea);
+				
+			}
+			
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
 		
 
 	}
