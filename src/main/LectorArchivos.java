@@ -12,7 +12,11 @@ public class LectorArchivos {
 			while (lector.hasNextLine()) {
 				
 				String linea = lector.nextLine();
-				System.out.println(linea);
+				String[] partes = linea.split(";");
+				
+				String id = (partes[0]);
+				String descripcion = partes[1];
+				
 				
 			}
 		lector.close();	
@@ -29,7 +33,7 @@ public class LectorArchivos {
 			while (lector.hasNextLine()) {
 				
 				String linea = lector.nextLine();
-				System.out.println(linea);
+				String metricas = linea;
 				
 				
 			}
@@ -44,10 +48,15 @@ public class LectorArchivos {
 			File archivosExperimento = new File("archivos/predicciones.txt");
 			Scanner lector = new Scanner(archivosExperimento);
 			
+			
 			while (lector.hasNextLine()) {
 				
 				String linea = lector.nextLine();
-				System.out.println(linea);
+				String [] partes = linea.split(";");
+				
+				String id2 = partes[0];
+				int valor1 = Integer.valueOf(partes[1]);
+				
 				
 			}
 		lector.close();	
@@ -61,10 +70,26 @@ public class LectorArchivos {
 			File archivosVerificaciones = new File("archivos/verificacion_docente_confusiones.csv");
 			Scanner lector = new Scanner(archivosVerificaciones);
 			
+			String linea = lector.nextLine();
+			
+			
+			
+			
 			while (lector.hasNextLine()) {
 				
-				String linea = lector.nextLine();
-				System.out.println(linea);
+				String linea2 = lector.nextLine();
+				String[] partes = linea2.split(",");
+				
+				String experimento = partes[0];
+				int tp = Integer.valueOf(partes[1]);
+				int fp = Integer.valueOf(partes[2]);
+				int tn = Integer.valueOf(partes[3]);
+				int fn = Integer.valueOf(partes[4]);
+				
+				
+				
+				
+				
 				
 			}
 		lector.close();	
