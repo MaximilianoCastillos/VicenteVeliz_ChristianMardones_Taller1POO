@@ -128,12 +128,16 @@ public class Taller_1 {
 				
 				allAcurracy = (allTP + allTN) / (allTP + allFP + allTN + allFN);
 				
+				//FALTA ARREGLAR ESTA PARTE DE ARRIBA (CHENTE)
+				
 				//Printear metricas del experimento (CHENTE)
 				System.out.println("Metricas del experimento: ");
 				System.out.println("Acurracy = " + Acurracy);
 				System.out.println("Precision = " + Precision);
 				System.out.println("Recall = " + Recall);
 				System.out.println("F1-Score = " + F1Score);
+				
+				//LOS PRINTS NO SON CORRECTOS FALTAN ARREGLARLOS (CHENTE)
 				
 				//Printear el promedio de todos los modelos (CHENTE)
 				System.out.println("Promedio de acurracy en todos los modelos = "+ allAcurracy);
@@ -146,7 +150,6 @@ public class Taller_1 {
 					seguirViendoString = menuUsuario.nextLine();
 					seguirViendoString = seguirViendoString.toLowerCase();
 					seguirViendoString = seguirViendoString.strip();
-					System.out.println(seguirViendoString);
 					
 					if (!seguirViendoString.equals("si") && !seguirViendoString.equals("no")) { //El equals es para comparar strings
 							System.out.println("Ingrese un si o un no");
