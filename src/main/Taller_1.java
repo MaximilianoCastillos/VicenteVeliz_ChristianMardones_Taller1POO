@@ -101,13 +101,13 @@ public class Taller_1 {
 				        else if (real == 0 && predicho == 0) TN++;
 				        else if (real == 1 && predicho == 0) FN++;
 					
-					
+					}
 					//Para ver los valores de todos los experimentos
 					if (real == 1 && predicho == 1) allTP++;
 				    else if (real == 0 && predicho == 1) allFP++;
 				    else if (real == 0 && predicho == 0) allTN++;
 				    else if (real == 1 && predicho == 0) allFN++;
-					}
+					
 				}
                 lectorPredicciones.close();
 				
@@ -121,12 +121,12 @@ public class Taller_1 {
 				double Acurracy = 0, Precision = 0, Recall = 0, F1Score = 0, allAcurracy = 0;
 				
 				//Formulas para las metricas del experimento (CHENTE)
-				Acurracy = (TP + TN) / (TP + FP + TN + FN);
-				Precision = TP / (TP + FP);
-				Recall = TP / (TP + FN);
-				F1Score = 2 * (Precision * Recall) / (Precision + Recall);
+				Acurracy = (double)(TP + TN) / (TP + FP + TN + FN);
+				Precision = (double)TP / (TP + FP);
+				Recall = (double)TP / (TP + FN);
+				F1Score = 2 * (double)(Precision * Recall) / (Precision + Recall);
 				
-				allAcurracy = (allTP + allTN) / (allTP + allFP + allTN + allFN);
+				allAcurracy = (double)(allTP + allTN) / (allTP + allFP + allTN + allFN);
 				
 				//FALTA ARREGLAR ESTA PARTE DE ARRIBA (CHENTE)
 				
@@ -174,6 +174,54 @@ public class Taller_1 {
 			
 			leer.close();
 			lector.close();
+		}
+		
+		if (teclado == 1) {
+			//verifico por si hay un experimento que tenga valor 0 y no se contabilice en usuario 
+			File arch = new File("archivos/experimentos.txt");
+			Scanner lector = new Scanner(arch);
+			int contador = 0; 
+			while(lector.hasNextLine()) {
+				contador += 1;
+				lector.nextLine();
+				}
+			//fila = experimentos columnas = metricas (Accuracy,Precision,Recall,F1-Score)
+			double[][] matriz = new double[contador][4];
+			
+			File archMetricas = new File("archivos/predicciones.txt");
+			Scanner lectorMetricas = new Scanner(archMetricas);
+			
+			int TP = 0;
+			int FP = 0;
+			int TN = 0;
+			int FN = 0;
+			
+			
+			while (lectorMetricas.hasNextLine()) {
+				String linea = lectorMetricas.nextLine();
+				String[] partes = linea.split(";");
+				String exp = partes[0];
+				int real = Integer.valueOf(partes[1]);
+				int predicho = Integer.valueOf(partes[2]);
+				
+				if (real == 1 && predicho == 1) TP++;
+				else if (real == 0 && predicho == 1) FP++;
+				else if (real == 0 && predicho == 0) TN++;
+				else if (real == 1 && predicho == 0) FN++;
+				
+				
+				
+			}
+			
+			
+			
+			lector.close();
+			
+			
+			 
+			
+			
+			
 		}
 		
 	
