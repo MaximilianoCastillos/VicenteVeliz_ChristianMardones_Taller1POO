@@ -14,50 +14,152 @@ public class Taller_1 {
 		int teclado = 0;
 		//hasta que tire un valor correcto 
 		do {
-			System.out.println("menu Admin(1)");
-			System.out.println("menu Usuario(2)");
-			System.out.print("ingrese su opcion: ");
+			System.out.println("Menu Admin (1)");
+			System.out.println("Menu Usuario (2)");
+			System.out.print("Ingrese su opcion: ");
 			teclado = scan.nextInt();
+			
+			if (teclado != 1 && teclado != 2) {                          //Agregue este if pq o si no me da toc (CHENTE)
+				System.out.println("Ingrese una opcion valida.");
+				System.out.println("");
+			}
 
 			
 		} while (teclado != 1 && teclado != 2);
 		
 		//menu de Usuario
-		if (teclado == 1) {
-			System.out.println("entro");
+		if (teclado == 2) {         //Cambie a 2 el usuario porque eso sale arriba.
+			System.out.println("Entro");
 			File arch = new File("archivos/experimentos.txt");
 			Scanner lector = new Scanner(arch);
-			int contadorExpermientos = 0;
+			int contadorExperimientos = 0;   //Cambie de "Experminetos" a Experimentos (CHENTE)
 			
 			//lei todo el archivo para saber la cantidad de experimentos que hay y de ahi hacer la lista
 			while (lector.hasNextLine()) {
-				contadorExpermientos += 1;
+				contadorExperimientos += 1;
 				lector.nextLine();
 			}
 			lector.close();
-			String[] expermientos = new String[contadorExpermientos];
+			String[] expermientos = new String[contadorExperimientos];
+			String[] descripcionExp = new String[contadorExperimientos];  //Nueva lista para tener la descripcion de los experimentos (CHENTE)
+			
 			// aca agrego los nombre a una lista 
 			Scanner leer = new Scanner(arch);
-			for (int i = 0; i < contadorExpermientos;i++) {
+			for (int i = 0; i < contadorExperimientos;i++) {
 				String linea = leer.nextLine();
 				String[] partes = linea.split(";");
 				
+				String descripcionExperimentos = partes[1];
 				String id = partes[0];
 				expermientos[i] = id;
+				descripcionExp[i] = descripcionExperimentos;
+				
 				
 			}
 			// 1) mostrar los experimentos
-			for (int i = 0; i < contadorExpermientos; i++) {
-			    System.out.println(expermientos[i]);
+			for (int i = 0; i < contadorExperimientos; i++) {
+			    System.out.println(expermientos[i] + " " + descripcionExp[i]);
 			}
 			
 			//pregunto cual experimento quiere ver
-			System.out.print("cual experimento desea ver???: ");
 			Scanner leer2 = new Scanner(System.in);
-			String expVer = leer2.nextLine();
+			int expVer = 0;
+			boolean seguirViendo = true;  //Va a servir para ver si parar el codigo o si quiere seguir viendo mas experimentos (CHENTE)
 			// con esta respuesta debes leer el arch de predicciones y de ahi ir comparando cuales 
 			//son los TP,FN,FP,TN
 			
+			while (seguirViendo == true) {
+				do {                    //Va a servir para que de una opcion valida. (CHENTE)
+					System.out.print("¿Cual experimento desea ver? (1,2,3,4) : ");
+					expVer = leer2.nextInt();
+					if (expVer != 1 && expVer != 2 && expVer != 3 && expVer != 4) {
+						System.out.println("Ingrese una opcion valida.");
+						System.out.println("");
+					}
+					
+				} while (expVer != 1 && expVer != 2 && expVer != 3 && expVer != 4);
+				
+				//Leer archivo de predicciones (CHENTE)
+				File archPredicciones = new File("archivos/predicciones.txt");
+				Scanner lectorPredicciones = new Scanner(archPredicciones);
+				
+				int TP = 0, FP = 0, TN= 0, FN= 0; //Valores a calcular del experimento seleccionado (CHENTE)
+				int allTP = 0, allFP = 0, allTN = 0, allFN = 0;
+				
+				while (lectorPredicciones.hasNextLine()) {
+					String linea = lectorPredicciones.nextLine();
+					String[] partes = linea.split(";");
+					String[] separadorExp = partes[0].split("p"); //Sirve para tener directamente el numero del experimento (CHENTE)
+					
+					int idExp = Integer.valueOf(separadorExp[1]);
+					int real = Integer.valueOf(partes[1]);
+					int predicho = Integer.valueOf(partes[2]);
+					
+					if (idExp == expVer) { //Ver los valores de TP,FN,FP,TN (CHENTE)
+						if (real == 1 && predicho == 1) TP++;
+				        else if (real == 0 && predicho == 1) FP++;
+				        else if (real == 0 && predicho == 0) TN++;
+				        else if (real == 1 && predicho == 0) FN++;
+					
+					
+					//Para ver los valores de todos los experimentos
+					if (real == 1 && predicho == 1) allTP++;
+				    else if (real == 0 && predicho == 1) allFP++;
+				    else if (real == 0 && predicho == 0) allTN++;
+				    else if (real == 1 && predicho == 0) allFN++;
+					}
+				}
+                lectorPredicciones.close();
+				
+				//Mostar la matriz de confusion de experimentos (CHENTE)
+				
+				System.out.println("Matriz de confusion para experimento "+ expVer + ":");
+				System.out.println("TP = " + TP + " | FP = " + FP);
+				System.out.println("TN = " + TN + " | FN = " + FN);
+				
+				//Ver las metricas del experimento (CHENTE)
+				double Acurracy = 0, Precision = 0, Recall = 0, F1Score = 0, allAcurracy = 0;
+				
+				//Formulas para las metricas del experimento (CHENTE)
+				Acurracy = (TP + TN) / (TP + FP + TN + FN);
+				Precision = TP / (TP + FP);
+				Recall = TP / (TP + FN);
+				F1Score = 2 * (Precision * Recall) / (Precision + Recall);
+				
+				allAcurracy = (allTP + allTN) / (allTP + allFP + allTN + allFN);
+				
+				//Printear metricas del experimento (CHENTE)
+				System.out.println("Metricas del experimento: ");
+				System.out.println("Acurracy = " + Acurracy);
+				System.out.println("Precision = " + Precision);
+				System.out.println("Recall = " + Recall);
+				System.out.println("F1-Score = " + F1Score);
+				
+				//Printear el promedio de todos los modelos (CHENTE)
+				System.out.println("Promedio de acurracy en todos los modelos = "+ allAcurracy);
+				
+				//Preguntar si quiere seguir viendo experimentos al usuario (CHENTE)
+				Scanner menuUsuario = new Scanner(System.in);
+				String seguirViendoString = "";
+				do {
+					System.out.print("¿Desea seguir viendo experimentos? (si o no) : ");
+					seguirViendoString = menuUsuario.nextLine();
+					seguirViendoString = seguirViendoString.toLowerCase();
+					seguirViendoString = seguirViendoString.strip();
+					System.out.println(seguirViendoString);
+					
+					if (!seguirViendoString.equals("si") && !seguirViendoString.equals("no")) { //El equals es para comparar strings
+							System.out.println("Ingrese un si o un no");
+							System.out.println("");
+					}
+				} while (!seguirViendoString.equals("si") && !seguirViendoString.equals("no"));
+				menuUsuario.close();
+				if (seguirViendoString.equals("no")) {
+					seguirViendo = false;
+				}
+				else seguirViendo = true;
+				
+			}
 			
 			
 			
