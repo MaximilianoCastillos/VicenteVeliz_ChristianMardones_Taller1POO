@@ -1,7 +1,7 @@
 package main;
-//Integrante 1: Vicente Veliz
+//Integrante 1: Vicente Veliz | Ingeneria Civil en Informatica
 //RUT: 22.012.230-1
-//Integrante 2: Christian Mardones
+//Integrante 2: Christian Mardones | Ingeneria Civil en Informatica
 //RUT: 22.026.428-9
 
 import java.io.File;
