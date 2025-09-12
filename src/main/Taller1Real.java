@@ -32,6 +32,38 @@ public class Taller1Real {
 			
 			input.nextLine();
 			
+			
+			if (teclado == 1) {
+				System.out.println("1) Ver la matriz completa de métricas");
+				System.out.println("2) Identificar el experimento con mejor F1-Score ");
+				System.out.println("3) Calcular promedio global de cada métrica");
+				System.out.println("4) Comparar dos experimentos lado a lado");
+				System.out.println("5) (EXTRA) Comparar CSV con matriz de confusión generada ");
+				System.out.println("6) Salir");
+				
+				teclado = input.nextInt();
+				
+				if (teclado == 1) {
+					
+					
+				}
+				if (teclado == 2) {
+					
+				}
+				if (teclado == 3) {
+					
+				}
+				if (teclado == 4) {
+					
+				}
+				if (teclado == 5) {
+					
+				}
+				if (teclado == 6) {
+					
+				}
+			}
+			
 			if (teclado == 2) {
 				boolean seguirViendoUsuario = true; //
 				
@@ -273,8 +305,11 @@ public class Taller1Real {
 						
 					}
 					if (teclado == 5) {
+						seguirViendoUsuario = false;						
 						
 					}
+					
+			
 					
 				}
 			}
