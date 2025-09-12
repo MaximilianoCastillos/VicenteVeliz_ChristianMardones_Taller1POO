@@ -49,7 +49,7 @@ public class Taller1Real {
 						
 					}
 					if (teclado == 3) {
-						
+						System.out.println("prueba");
 					}
 					if (teclado == 4) {
 						
