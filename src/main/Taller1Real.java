@@ -274,25 +274,77 @@ public class Taller1Real {
 						
 					}
 					if (teclado == 4) {
-						File archExperimentos = new File("archivos/experimentos");
-						Scanner lector = new Scanner (archExperimentos);
+						File archExperimentos = new File("archivos/experimentos.txt");
+						Scanner lectorExperimentos = new Scanner (archExperimentos);
 						int contador = 0;
 						
 						
-						while (lector.hasNextLine()) {
+						while (lectorExperimentos.hasNextLine()) {
 							contador += 1;
-							lector.nextLine();
+							lectorExperimentos.nextLine();
 						}
-						lector.close();
+						lectorExperimentos.close();
+						
 						
 						int[] TP = new int[contador];
 					    int[] FP = new int[contador];
 					    int[] TN = new int[contador];
 					    int[] FN = new int[contador];
+					    
+					    File archPredicciones = new File("archivos/predicciones.txt");
+					    Scanner lectorPredicciones = new Scanner(archPredicciones);
 						
+					    while (lectorPredicciones.hasNextLine()) {
+					        String linea = lectorPredicciones.nextLine();
+					        String[] partes = linea.split(";");
+					        String[] separadorExp = partes[0].split("p");
+
+					        int idExp = Integer.valueOf(separadorExp[1]) - 1;
+
+					        int real = Integer.valueOf(partes[1]);
+					        int predicho = Integer.valueOf(partes[2]);
+
+					        if (real == 1 && predicho == 1) TP[idExp]++;
+					        else if (real == 0 && predicho == 1) FP[idExp]++;
+					        else if (real == 0 && predicho == 0) TN[idExp]++;
+					        else if (real == 1 && predicho == 0) FN[idExp]++;
+					    }
+					    lectorPredicciones.close();
+					    
+						Scanner lector = new Scanner(System.in);
+					    
+					    int experimento1;
+					    int experimento2;
+					    
+					    do {
+					    	System.out.print("ingrese primer experimento: ");
+						    experimento1 = lector.nextInt() -1;
+						    System.out.print("ingrese segundo experimento: ");
+						    experimento2 = lector.nextInt() - 1;
+							
+					    	
+					    	
+						} while (experimento1 < 0|| experimento1 >= contador || experimento2 < 0|| experimento2 >= contador);
 						
-						
-						
+					    System.out.println(" ");
+				        System.out.println("Métrica       | Exp" + (experimento1+1) + " | Exp" + (experimento2+1));
+				        System.out.println("-------------------------------------------");
+				        
+				        double accuracy = (double)(TP[experimento1] + TN[experimento1])/(TP[experimento1] + FP[experimento1] + TN[experimento1] + FN[experimento1]);
+				        double precision = (double)(TP[experimento1])/(TP[experimento1] + FP[experimento1]);
+				        double recall = (double)(TP[experimento1])/(TP[experimento1] + FN[experimento1]);
+				        double f1Score = 2 * (precision * recall) / (precision + recall);
+				        
+				        double accuracy2 = (double)(TP[experimento2] + TN[experimento2])/(TP[experimento2] + FP[experimento2] + TN[experimento2] + FN[experimento2]);
+				        double precision2 = (double)(TP[experimento2])/(TP[experimento2] + FP[experimento2]);
+				        double recall2 = (double)(TP[experimento2])/(TP[experimento2] + FN[experimento2]);
+				        double f1Score2 = 2 * (precision2 * recall2) / (precision2 + recall2);
+				        
+				        System.out.println("Accuracy      | " + accuracy + " | " + accuracy2);
+				        System.out.println("Precision     | " + precision + " | " + precision2);
+				        System.out.println("Recall        | " + recall + " | " + recall2);
+				        System.out.println("F1-Score      | " + f1Score + " | " + f1Score2);
+				        
 						
 					}
 					if (teclado == 5) {
