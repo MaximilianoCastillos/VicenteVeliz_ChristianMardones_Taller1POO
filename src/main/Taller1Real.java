@@ -144,7 +144,6 @@ public class Taller1Real {
 						int id = 0;
 						double mayor = -1;
 						
-						
 						while (inputPredicciones.hasNextLine()) {
 							String linea = inputPredicciones.nextLine();
 					        String[] partes = linea.split(";");
@@ -176,8 +175,6 @@ public class Taller1Real {
 									id = i + 1;
 								}
 								
-								
-								
 							}
 							
 							System.out.println("el ID del F1-Score mayor es: " + id + " con un valor de: " + Math.round(mayor * 100.0) / 100.0);
@@ -186,13 +183,91 @@ public class Taller1Real {
 							System.out.println(e);
 						}
 						
-						
-						
-						
-						
 						System.out.println("---------------------------------------------------");
 						System.out.println(" ");				}
 					if (teclado == 3) {
+						//Contar cuantos experimentos hay
+						File archExperimentos = new File("archivos/experimentos.txt");
+						Scanner inputExp = new Scanner(archExperimentos);
+						
+						int contadorExperimentos = 0;
+						
+						while (inputExp.hasNextLine()) {
+							contadorExperimentos++;
+							inputExp.nextLine();
+						}
+						inputExp.close();
+
+						//Crear listas
+						
+						int[] TP = new int[contadorExperimentos];
+					    int[] FP = new int[contadorExperimentos];
+					    int[] TN = new int[contadorExperimentos];
+					    int[] FN = new int[contadorExperimentos];
+						
+					    //Leer las predicciones
+					    
+						File archPredicciones = new File("archivos/predicciones.txt"); //
+						Scanner inputPredicciones = new Scanner(archPredicciones); //
+						
+						
+						while (inputPredicciones.hasNextLine()) {
+							String linea = inputPredicciones.nextLine();
+					        String[] partes = linea.split(";");
+					        String[] separadorExp = partes[0].split("p");
+					        
+					        int idExp = Integer.valueOf(separadorExp[1]) - 1;
+					        
+					        int real = Integer.valueOf(partes[1]);
+					        int predicho = Integer.valueOf(partes[2]);
+					        
+					        if (real == 1 && predicho == 1) TP[idExp]++;
+					        else if (real == 0 && predicho == 1) FP[idExp]++;
+					        else if (real == 0 && predicho == 0) TN[idExp]++;
+					        else if (real == 1 && predicho == 0) FN[idExp]++;
+						}
+						inputPredicciones.close();
+						
+						double promedioAccurracy = 0, promedioPrecision = 0, promedioRecall = 0, promedioF1Score = 0;
+						
+						try {
+							for (int i = 0; i < contadorExperimentos;i++ ) {
+								
+								double accuracy = (double)(TP[i] + TN[i])/(TP[i] + FP[i] + TN[i] + FN[i]);
+								promedioAccurracy += accuracy;
+								double precision = (double)(TP[i]) / (TP[i] + FP[i]);
+								promedioPrecision += precision;
+								double recall = (double)(TP[i] + FN[i]);
+								promedioRecall += recall;
+								double f1Score = (double)(2*(precision * recall) / (precision + recall));
+								promedioF1Score += f1Score;
+								
+							}
+								
+						} catch (Exception e) {
+							System.out.println(e);
+						}
+						
+						promedioAccurracy = (double) promedioAccurracy/contadorExperimentos;
+						promedioAccurracy = Math.round(promedioAccurracy * 100.0) / 100.0;
+						promedioPrecision = (double) promedioPrecision/contadorExperimentos;
+						promedioPrecision = Math.round(promedioPrecision * 100.0) / 100.0;
+						promedioRecall = (double) promedioRecall/contadorExperimentos;
+						promedioRecall = Math.round(promedioRecall * 100.0) / 100.0;
+						promedioF1Score = (double) promedioF1Score/contadorExperimentos;
+						promedioF1Score = Math.round(promedioF1Score * 100.0) / 100.0;
+						
+						System.out.println(" ");
+						System.out.println("----------- PROMEDIO GLOBAL -----------");
+						System.out.println("Promedio global de Accuracy = "+ promedioAccurracy);
+						System.out.println("Promedio global de Precision = "+ promedioPrecision);
+						System.out.println("Promedio global de Recall = "+ promedioRecall);
+						System.out.println("Promedio global de F1-Score = "+ promedioF1Score);
+						System.out.println("---------------------------------------");
+						System.out.println(" ");
+						
+						
+						
 						
 					}
 					if (teclado == 4) {
