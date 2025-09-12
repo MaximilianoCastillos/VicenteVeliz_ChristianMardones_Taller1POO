@@ -40,12 +40,86 @@ public class Taller1Real {
 				System.out.println("4) Comparar dos experimentos lado a lado");
 				System.out.println("5) (EXTRA) Comparar CSV con matriz de confusión generada ");
 				System.out.println("6) Salir");
+				System.out.print("Ingrese una opcion: ");
 				
 				teclado = input.nextInt();
 				
 				if (teclado == 1) {
+					//Contar cuantos experimentos hay
+					File archExperimentos = new File("archivos/experimentos.txt");
+					Scanner inputExp = new Scanner(archExperimentos);
+					
+					int contadorExperimentos = 0;
+					
+					while (inputExp.hasNextLine()) {
+						contadorExperimentos++;
+						inputExp.nextLine();
+					}
+					inputExp.close();
+
+					//Crear listas
+					
+					int[] TP = new int[contadorExperimentos];
+				    int[] FP = new int[contadorExperimentos];
+				    int[] TN = new int[contadorExperimentos];
+				    int[] FN = new int[contadorExperimentos];
+					
+				    //Leer las predicciones
+				    
+					File archPredicciones = new File("archivos/predicciones.txt"); //
+					Scanner inputPredicciones = new Scanner(archPredicciones); //
 					
 					
+					while (inputPredicciones.hasNextLine()) {
+						String linea = inputPredicciones.nextLine();
+				        String[] partes = linea.split(";");
+				        String[] separadorExp = partes[0].split("p");
+				        
+				        int idExp = Integer.valueOf(separadorExp[1]) - 1;
+				        
+				        int real = Integer.valueOf(partes[1]);
+				        int predicho = Integer.valueOf(partes[2]);
+				        
+				        if (real == 1 && predicho == 1) TP[idExp]++;
+				        else if (real == 0 && predicho == 1) FP[idExp]++;
+				        else if (real == 0 && predicho == 0) TN[idExp]++;
+				        else if (real == 1 && predicho == 0) FN[idExp]++;
+					}
+					inputPredicciones.close();
+					
+					try {
+						System.out.println(" ");
+						System.out.println("--------- MATRIZ DE METRICAS ---------");
+						System.out.println("EXPERIMENTOS | ACCURACY | PRECISION | RECALL | F1-SCORE");
+						System.out.println("---------------------------------------------------");
+						for (int i = 0; i < contadorExperimentos;i++ ) {
+							
+							double accuracy = (double)(TP[i] + TN[i])/(TP[i] + FP[i] + TN[i] + FN[i]);
+							accuracy = Math.round(accuracy * 100.0) / 100.0;
+							double precision = (double)(TP[i]) / (TP[i] + FP[i]);
+							precision = Math.round(precision * 100.0) / 100.0;
+							double recall = (double)(TP[i] + FN[i]);
+							recall = Math.round(recall * 100.0) / 100.0;
+							double f1Score = (double)(2*(precision * recall) / (precision + recall));
+							f1Score = Math.round(f1Score * 100.0) / 100.0;
+							
+							System.out.println("Exp "+(i+1) + "        |  " + accuracy + "    |  " + precision + "     |  " + recall + "  |  " + f1Score  );
+							
+							
+							
+							//System.out.println("Métricas - Experimento " + (i+1));
+					        //System.out.println("Accuracy = " + accuracy);
+					        //System.out.println("Precision = " + precision);
+					        //System.out.println("Recall = " + recall);
+					        //System.out.println("F1-Score = " + f1Score);
+					        //System.out.println("-----------------");
+						}
+							
+					} catch (Exception e) {
+						System.out.println(e);
+					}
+					System.out.println("---------------------------------------------------");
+					System.out.println(" ");
 				}
 				if (teclado == 2) {
 					
