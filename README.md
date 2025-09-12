@@ -1,13 +1,15 @@
------------------------- DATOS INTEGRANTES -----------------------------
-INTEGRANTE N1:
--NOMBRE = Vicente Veliz
--Rut: 22.012.230-1
--Carrera: Ingeneria Civil en Informatica
--Usuario de github: MaximilianoCastillos
+# 👥 Integrantes del Proyecto
 
-INTEGRANTE N2:
--NOMBRE = Christian Mardones
--Rut: 22.026.428-9
--Carrera: Ingeneria civil en Informatica
--Usuario de github: Nasas20
-------------------------------------------------------------------------
+## 👨‍💻 Integrante 1
+- **Nombre:** Vicente Veliz  
+- **RUT:** 22.012.230-1  
+- **Carrera:** Ingeniería Civil en Informática  
+- **GitHub:** [MaximilianoCastillos](https://github.com/MaximilianoCastillos)  
+
+---
+
+## 👨‍💻 Integrante 2
+- **Nombre:** Christian Mardones  
+- **RUT:** 22.026.428-9  
+- **Carrera:** Ingeniería Civil en Informática  
+- **GitHub:** [Nasas20](https://github.com/Nasas20)  
