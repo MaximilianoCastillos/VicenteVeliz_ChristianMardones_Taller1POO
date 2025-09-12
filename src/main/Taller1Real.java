@@ -101,12 +101,13 @@ public class Taller1Real {
 							for (int i = 0; i < contadorExperimentos;i++ ) {
 								
 								double accuracy = (double)(TP[i] + TN[i])/(TP[i] + FP[i] + TN[i] + FN[i]);
-								accuracy = Math.round(accuracy * 100.0) / 100.0;
 								double precision = (double)(TP[i]) / (TP[i] + FP[i]);
-								precision = Math.round(precision * 100.0) / 100.0;
 								double recall = (double)(TP[i] + FN[i]);
-								recall = Math.round(recall * 100.0) / 100.0;
 								double f1Score = (double)(2*(precision * recall) / (precision + recall));
+								
+								accuracy = Math.round(accuracy * 100.0) / 100.0;
+								precision = Math.round(precision * 100.0) / 100.0;
+								recall = Math.round(recall * 100.0) / 100.0;
 								f1Score = Math.round(f1Score * 100.0) / 100.0;
 								
 								System.out.println("Exp "+(i+1) + "        |  " + accuracy + "    |  " + precision + "     |  " + recall + "  |  " + f1Score  );
@@ -348,10 +349,79 @@ public class Taller1Real {
 						
 					}
 					if (teclado == 5) {
-						
+						//Contar cuantos experimentos hay
+					    File archExperimentos = new File("archivos/experimentos.txt");
+					    Scanner inputExp = new Scanner(archExperimentos);
+					    int contadorExperimentos = 0;
+					    while (inputExp.hasNextLine()) {
+					        contadorExperimentos++;
+					        inputExp.nextLine();
+					    }
+					    inputExp.close();
+
+					    //Crear listas para matriz
+					    int[] TP = new int[contadorExperimentos];
+					    int[] FP = new int[contadorExperimentos];
+					    int[] TN = new int[contadorExperimentos];
+					    int[] FN = new int[contadorExperimentos];
+
+					    //Leer las predicciones para calcular la matriz
+					    File archPredicciones = new File("archivos/predicciones.txt");
+					    Scanner inputPredicciones = new Scanner(archPredicciones);
+					    while (inputPredicciones.hasNextLine()) {
+					        String linea = inputPredicciones.nextLine();
+					        String[] partes = linea.split(";");
+					        String[] separadorExp = partes[0].split("p");
+					        int idExp = Integer.valueOf(separadorExp[1]) - 1;
+
+					        int real = Integer.valueOf(partes[1]);
+					        int predicho = Integer.valueOf(partes[2]);
+
+					        if (real == 1 && predicho == 1) TP[idExp]++;
+					        else if (real == 0 && predicho == 1) FP[idExp]++;
+					        else if (real == 0 && predicho == 0) TN[idExp]++;
+					        else if (real == 1 && predicho == 0) FN[idExp]++;
+					    }
+					    inputPredicciones.close();
+
+					    //Leer el CSV de verificación
+					    File archCSV = new File("archivos/verificacion_docente_confusiones.csv");
+					    Scanner lectorCSV = new Scanner(archCSV);
+					    lectorCSV.nextLine();
+
+					    int index = 0;
+					    boolean todoBien = true;
+
+					    while (lectorCSV.hasNextLine()) {
+					        String linea = lectorCSV.nextLine();
+					        String[] partes = linea.split(";");
+					        
+					        String exp = partes[0];
+					        int tpOficial = Integer.valueOf(partes[1]);
+					        int fpOficial = Integer.valueOf(partes[2]);
+					        int tnOficial = Integer.valueOf(partes[3]);
+					        int fnOficial = Integer.valueOf(partes[4]);
+
+					        if (tpOficial == TP[index] && fpOficial == FP[index] && tnOficial == TN[index] && fnOficial == FN[index]) {
+					            System.out.println(exp + "Coincide con la verificación oficial.");
+					        } else {
+					            System.out.println(exp + "No coincide con la verificación oficial.");
+					            System.out.println("Calculos: TP = " + TP[index] + ", FP = " + FP[index] + ", TN = "+ TN[index] + ", FN = "+ FN[index] );
+					            System.out.println("Oficial: TP = " + tpOficial + ", FP = " + fpOficial + ", TN = "+ tnOficial + ", FN = "+ fnOficial);
+					            todoBien = false;
+					        }
+
+					        index++;
+					    }
+					    lectorCSV.close();
+
+					    if (todoBien) {
+					        System.out.println("Todas las matrices coinciden con el archivo de verificacion.");
+					    } else {
+					        System.out.println("Existen diferencias con la verificación oficial.");
+					    }
 					}
 					if (teclado == 6) {
-						
 						seguirViendoAdmin = false;
 						
 					}
