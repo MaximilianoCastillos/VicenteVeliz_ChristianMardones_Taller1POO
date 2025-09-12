@@ -1,10 +1,12 @@
 package main;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class Taller1Real {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws FileNotFoundException {
 		// TODO Auto-generated method stub
 		Scanner input = new Scanner(System.in);
 		
@@ -31,7 +33,7 @@ public class Taller1Real {
 			input.nextLine();
 			
 			if (teclado == 2) {
-				boolean seguirViendoUsuario = true;
+				boolean seguirViendoUsuario = true; //
 				
 				while (seguirViendoUsuario) {
 					System.out.println("1) Ver lista de experimentos");
@@ -46,10 +48,61 @@ public class Taller1Real {
 						
 					}
 					if (teclado == 2) {
+						input.nextLine(); //
+						//Contar cuantos experimentos hay
+						File archExperimentos = new File("archivos/experimentos.txt");
+						Scanner inputExp = new Scanner(archExperimentos);
+						
+						int contadorExperimentos = 0;
+						
+						while (inputExp.hasNextLine()) {
+							contadorExperimentos++;
+							inputExp.nextLine();
+						}
+						inputExp.close();
+						
+						//Crear listas
+						
+						int[] TP = new int[contadorExperimentos];
+					    int[] FP = new int[contadorExperimentos];
+					    int[] TN = new int[contadorExperimentos];
+					    int[] FN = new int[contadorExperimentos];
+						
+					    //Leer las predicciones
+					    
+						File archPredicciones = new File("archivos/predicciones.txt"); //
+						Scanner inputPredicciones = new Scanner(archPredicciones); //
+						
+						
+						while (inputPredicciones.hasNextLine()) {
+							String linea = inputPredicciones.nextLine();
+					        String[] partes = linea.split(";");
+					        String[] separadorExp = partes[0].split("p");
+					        
+					        int idExp = Integer.valueOf(separadorExp[1]) - 1;
+					        
+					        int real = Integer.valueOf(partes[1]);
+					        int predicho = Integer.valueOf(partes[2]);
+					        
+					        if (real == 1 && predicho == 1) TP[idExp]++;
+					        else if (real == 0 && predicho == 1) FP[idExp]++;
+					        else if (real == 0 && predicho == 0) TN[idExp]++;
+					        else if (real == 1 && predicho == 0) FN[idExp]++;
+					        
+						}
+						inputPredicciones.close();
+						
+						//Imprimir
+						
+						for (int i = 0; i < contadorExperimentos; i++) {
+					        System.out.println("Matriz de confusión - Experimento " + (i+1));
+					        System.out.println("TP = " + TP[i] + " | FP = " + FP[i]);
+					        System.out.println("TN = " + TN[i] + " | FN = " + FN[i]);
+						}
 						
 					}
 					if (teclado == 3) {
-						System.out.println("prueba");
+						
 					}
 					if (teclado == 4) {
 						
@@ -63,5 +116,4 @@ public class Taller1Real {
 		}
 		
 	}
-
 }
