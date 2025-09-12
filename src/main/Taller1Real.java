@@ -438,7 +438,7 @@ public class Taller1Real {
 		}
 				
 			if (teclado == 2) {
-				boolean seguirViendoUsuario = true; //
+				boolean seguirViendoUsuario = true; 
 				
 				while (seguirViendoUsuario) {
 					System.out.println();
@@ -531,13 +531,26 @@ public class Taller1Real {
 						}
 						inputPredicciones.close();
 						
-						//Imprimir
 						
-						for (int i = 0; i < contadorExperimentos; i++) {
+						Scanner usuario = new Scanner(System.in);
+						
+						int mostrar;
+						
+						 do {
+							System.out.print("ingrese experimento a ver: ");
+							mostrar = usuario.nextInt();
+								
+						    	
+						    	
+							} while (mostrar <= 0|| mostrar >= contadorExperimentos || mostrar < 0|| mostrar >= contadorExperimentos);
+						 
+						
+						
+						for (int i = 0; i < 1; i++) {
 					        System.out.println(" ");
-							System.out.println("Matriz de confusión - Experimento " + (i+1));
-					        System.out.println("TP = " + TP[i] + " | FP = " + FP[i]);
-					        System.out.println("TN = " + TN[i] + " | FN = " + FN[i]);
+							System.out.println("Matriz de confusión - Experimento " + (mostrar));
+					        System.out.println("TP = " + TP[mostrar-1] + " | FP = " + FP[mostrar-1]);
+					        System.out.println("TN = " + TN[mostrar -1 ] + " | FN = " + FN[mostrar-1]);
 					        System.out.println("-----------------");
 						}
 						
