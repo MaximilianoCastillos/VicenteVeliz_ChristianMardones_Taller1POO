@@ -42,10 +42,42 @@ public class Taller1Real {
 					System.out.println("4) Ver promedio de Accuracy de todos los modelos");
 					System.out.println("5) Salir menu de usuario");
 					
+					System.out.print("Ingrese una Opcion: ");
 					teclado = input.nextInt();
 					
 					if (teclado == 1) {
+						File arch = new File("archivos/experimentos.txt");
+						Scanner scan = new Scanner(arch);
+						int contador = 0;
 						
+						while (scan.hasNextLine()) {
+							contador += 1;
+							scan.nextLine();
+						}
+						
+						
+						String[] experimentos = new String[contador];
+						String[] descripcionExp = new String[contador];
+						
+						
+						Scanner leerArchivo = new Scanner(arch);
+						
+						
+						for (int i = 0; i < contador; i++) {
+							String linea = leerArchivo.nextLine();
+							String[] partes = linea.split(";");
+							String id = partes[0];
+							String texto = partes[1];
+							experimentos[i] = id;
+							descripcionExp[i] = texto;	
+						}
+						
+						for (int i = 0; i < contador;i++) {
+							System.out.println(experimentos[i] +  ": " + descripcionExp[i]);
+							
+						}
+						scan.close();
+						System.out.println("-----------");
 					}
 					if (teclado == 2) {
 						input.nextLine(); //
@@ -98,10 +130,37 @@ public class Taller1Real {
 					        System.out.println("Matriz de confusión - Experimento " + (i+1));
 					        System.out.println("TP = " + TP[i] + " | FP = " + FP[i]);
 					        System.out.println("TN = " + TN[i] + " | FN = " + FN[i]);
+					        System.out.println("-----------------");
 						}
+						
 						
 					}
 					if (teclado == 3) {
+						//Contar cuantos experimentos hay
+						File archExperimentos = new File("archivos/experimentos.txt");
+						Scanner inputExp = new Scanner(archExperimentos);
+						
+						int contadorExperimentos = 0;
+						
+						while (inputExp.hasNextLine()) {
+							contadorExperimentos++;
+							inputExp.nextLine();
+						}
+						inputExp.close();
+						
+						
+						
+						
+						double[] accuracy = new double[contadorExperimentos];
+						double[] precision = new double[contadorExperimentos];
+						double[] Recall = new double[contadorExperimentos];
+						double[] f1Score = new double[contadorExperimentos];
+						
+						
+						
+						
+						
+						
 						
 					}
 					if (teclado == 4) {
