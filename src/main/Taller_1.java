@@ -85,11 +85,18 @@ public class Taller_1 {
 				
 				int TP = 0, FP = 0, TN= 0, FN= 0; //Valores a calcular del experimento seleccionado (CHENTE)
 				int allTP = 0, allFP = 0, allTN = 0, allFN = 0;
+				double[] accuracies = new double[contadorExperimientos+1]; //Sirve para calcular el promedio(CHENTE)
+				
+				int contador = 0; //Contador que sirve para calcular el promedio de acurracies
+				int aux = 1;
+				
 				
 				while (lectorPredicciones.hasNextLine()) {
 					String linea = lectorPredicciones.nextLine();
 					String[] partes = linea.split(";");
 					String[] separadorExp = partes[0].split("p"); //Sirve para tener directamente el numero del experimento (CHENTE)
+					
+					
 					
 					int idExp = Integer.valueOf(separadorExp[1]);
 					int real = Integer.valueOf(partes[1]);
@@ -102,15 +109,27 @@ public class Taller_1 {
 				        else if (real == 1 && predicho == 0) FN++;
 					
 					}
-					//Para ver los valores de todos los experimentos
-					if (real == 1 && predicho == 1) allTP++;
-				    else if (real == 0 && predicho == 1) allFP++;
-				    else if (real == 0 && predicho == 0) allTN++;
-				    else if (real == 1 && predicho == 0) allFN++;
+					if (idExp == aux) {
+						if (real == 1 && predicho == 1) allTP++;
+				        else if (real == 0 && predicho == 1) allFP++;
+				        else if (real == 0 && predicho == 0) allTN++;
+				        else if (real == 1 && predicho == 0) allFN++;
+					}
+					else if (aux != idExp) {
+						aux += 1;
+						accuracies[contador] = (double)(allTP + allTN) / (allTP + allFP + allTN + allFN);
+						contador += 1;
+						allTP = 0; allFP = 0; allTN = 0; allFN = 0;
+						System.out.println(accuracies[contador-1]);
+					}
+					
+					
 					
 				}
                 lectorPredicciones.close();
-				
+                
+                
+                
 				//Mostar la matriz de confusion de experimentos (CHENTE)
 				
 				System.out.println("Matriz de confusion para experimento "+ expVer + ":");
@@ -126,7 +145,11 @@ public class Taller_1 {
 				Recall = (double)TP / (TP + FN);
 				F1Score = 2 * (double)(Precision * Recall) / (Precision + Recall);
 				
-				allAcurracy = (double)(allTP + allTN) / (allTP + allFP + allTN + allFN);
+				for(int i = 0;i<5;i++) {
+					allAcurracy += accuracies[i];
+				}
+				allAcurracy = (double) allAcurracy/4;
+				
 				
 				//FALTA ARREGLAR ESTA PARTE DE ARRIBA (CHENTE)
 				
