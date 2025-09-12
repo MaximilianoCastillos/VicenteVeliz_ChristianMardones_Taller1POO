@@ -33,6 +33,10 @@ public class Taller1Real {
 			
 			input.nextLine();
 			
+			if (teclado == 3) {
+				seguirViendo = false;
+			}
+			
 			
 			if (teclado == 1) {
 				boolean seguirViendoAdmin = true;
@@ -394,7 +398,7 @@ public class Taller1Real {
 
 					    while (lectorCSV.hasNextLine()) {
 					        String linea = lectorCSV.nextLine();
-					        String[] partes = linea.split(";");
+					        String[] partes = linea.split(",");
 					        
 					        String exp = partes[0];
 					        int tpOficial = Integer.valueOf(partes[1]);
@@ -403,7 +407,8 @@ public class Taller1Real {
 					        int fnOficial = Integer.valueOf(partes[4]);
 
 					        if (tpOficial == TP[index] && fpOficial == FP[index] && tnOficial == TN[index] && fnOficial == FN[index]) {
-					            System.out.println(exp + "Coincide con la verificación oficial.");
+					            System.out.println(" ");
+					        	System.out.println(exp + " Coincide con la verificación oficial.");
 					        } else {
 					            System.out.println(exp + "No coincide con la verificación oficial.");
 					            System.out.println("Calculos: TP = " + TP[index] + ", FP = " + FP[index] + ", TN = "+ TN[index] + ", FN = "+ FN[index] );
@@ -416,18 +421,21 @@ public class Taller1Real {
 					    lectorCSV.close();
 
 					    if (todoBien) {
-					        System.out.println("Todas las matrices coinciden con el archivo de verificacion.");
-					    } else {
-					        System.out.println("Existen diferencias con la verificación oficial.");
+					    	System.out.println(" ");
+					    	System.out.println("Todas las matrices coinciden con el archivo de verificacion.");
+					    } 
+					    else {
+					    	System.out.println(" ");
+					    	System.out.println("Existen diferencias con la verificación oficial.");
 					    }
-					}
-					if (teclado == 6) {
-						seguirViendoAdmin = false;
-						
-					}
+					    System.out.println(" ");
 				
 				}
+				if (teclado == 6) {
+					seguirViendoAdmin = false;
+				}
 			}
+		}
 				
 			if (teclado == 2) {
 				boolean seguirViendoUsuario = true; //
@@ -678,6 +686,7 @@ public class Taller1Real {
 					}													
 				}
 			}
-		}		
+		}
+		input.close();
 	}
 }
