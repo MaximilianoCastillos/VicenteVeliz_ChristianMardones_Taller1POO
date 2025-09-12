@@ -599,6 +599,17 @@ public class Taller1Real {
 						}
 						inputPredicciones.close();
 						
+						int expAVer = 0;
+						
+						do {
+							System.out.print("¿Que experimento desea ver?: ");
+							expAVer = input.nextInt();
+							if (expAVer <= 0|| expAVer >= contadorExperimentos || expAVer < 0|| expAVer >= contadorExperimentos) {
+								System.out.println("Ingrese una opcion valida.");
+								System.out.println(" ");
+							}
+						} while (expAVer <= 0|| expAVer >= contadorExperimentos || expAVer < 0|| expAVer >= contadorExperimentos);
+						
 						try {
 							for (int i = 0; i < contadorExperimentos;i++ ) {
 								
@@ -608,12 +619,14 @@ public class Taller1Real {
 								double recall = (double)(TP[i] + FN[i]);
 								double f1Score = (double)(2*(precision * recall) / (precision + recall));
 								
-								System.out.println("Métricas - Experimento " + (i+1));
-						        System.out.println("Accuracy = " + accuracy);
-						        System.out.println("Precision = " + precision);
-						        System.out.println("Recall = " + recall);
-						        System.out.println("F1-Score = " + f1Score);
-						        System.out.println("-----------------");
+								if (expAVer == i+1) {
+									System.out.println("Métricas - Experimento " + (i+1));
+							        System.out.println("Accuracy = " + accuracy);
+							        System.out.println("Precision = " + precision);
+							        System.out.println("Recall = " + recall);
+							        System.out.println("F1-Score = " + f1Score);
+							        System.out.println("-----------------");
+								}
 									
 							}
 								
