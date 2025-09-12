@@ -1,4 +1,8 @@
 package main;
+//Integrante 1: Vicente Veliz
+//RUT: 22.012.230-1
+//Integrante 2: Christian Mardones
+//RUT: 22.026.428-9
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -184,7 +188,8 @@ public class Taller1Real {
 								}
 								
 							}
-							
+							System.out.println(" ");
+							System.out.println("---------------------------------------------------");
 							System.out.println("el ID del F1-Score mayor es: " + id + " con un valor de: " + Math.round(mayor * 100.0) / 100.0);
 								
 						} catch (Exception e) {
@@ -479,12 +484,14 @@ public class Taller1Real {
 							descripcionExp[i] = texto;	
 						}
 						
+						System.out.println(" ");
+						System.out.println("--------------------------");
 						for (int i = 0; i < contador;i++) {
 							System.out.println(experimentos[i] +  ": " + descripcionExp[i]);
 							
 						}
 						scan.close();
-						System.out.println("-----------");
+						System.out.println("--------------------------");
 					}
 					if (teclado == 2) {
 						input.nextLine(); //
@@ -542,7 +549,7 @@ public class Taller1Real {
 								
 						    	
 						    	
-							} while (mostrar <= 0|| mostrar >= contadorExperimentos || mostrar < 0|| mostrar >= contadorExperimentos);
+							} while (mostrar <= 0|| mostrar > contadorExperimentos || mostrar < 0|| mostrar > contadorExperimentos);
 						 
 						
 						
@@ -600,15 +607,15 @@ public class Taller1Real {
 						inputPredicciones.close();
 						
 						int expAVer = 0;
-						
+						System.out.println(" ");
 						do {
 							System.out.print("¿Que experimento desea ver?: ");
 							expAVer = input.nextInt();
-							if (expAVer <= 0|| expAVer >= contadorExperimentos || expAVer < 0|| expAVer >= contadorExperimentos) {
+							if (expAVer <= 0|| expAVer > contadorExperimentos || expAVer < 0|| expAVer > contadorExperimentos) {
 								System.out.println("Ingrese una opcion valida.");
 								System.out.println(" ");
 							}
-						} while (expAVer <= 0|| expAVer >= contadorExperimentos || expAVer < 0|| expAVer >= contadorExperimentos);
+						} while (expAVer <= 0|| expAVer > contadorExperimentos || expAVer < 0|| expAVer > contadorExperimentos);
 						
 						try {
 							for (int i = 0; i < contadorExperimentos;i++ ) {
@@ -620,6 +627,8 @@ public class Taller1Real {
 								double f1Score = (double)(2*(precision * recall) / (precision + recall));
 								
 								if (expAVer == i+1) {
+									System.out.println(" ");
+									System.out.println("-----------------");
 									System.out.println("Métricas - Experimento " + (i+1));
 							        System.out.println("Accuracy = " + accuracy);
 							        System.out.println("Precision = " + precision);
