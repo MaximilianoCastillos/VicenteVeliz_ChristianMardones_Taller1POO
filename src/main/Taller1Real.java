@@ -16,6 +16,7 @@ public class Taller1Real {
 			int teclado = 0;
 			//hasta que tire un valor correcto 
 			do {
+				System.out.println();
 				System.out.println("Menu Admin (1)");
 				System.out.println("Menu Usuario (2)");
 				System.out.println("Salir (3)");
@@ -36,6 +37,8 @@ public class Taller1Real {
 			if (teclado == 1) {
 				boolean seguirViendoAdmin = true;
 				while (seguirViendoAdmin) {
+					System.out.println();
+					System.out.println("MENU ADMIN");
 					System.out.println("1) Ver la matriz completa de métricas");
 					System.out.println("2) Identificar el experimento con mejor F1-Score ");
 					System.out.println("3) Calcular promedio global de cada métrica");
@@ -271,12 +274,33 @@ public class Taller1Real {
 						
 					}
 					if (teclado == 4) {
+						File archExperimentos = new File("archivos/experimentos");
+						Scanner lector = new Scanner (archExperimentos);
+						int contador = 0;
+						
+						
+						while (lector.hasNextLine()) {
+							contador += 1;
+							lector.nextLine();
+						}
+						lector.close();
+						
+						int[] TP = new int[contador];
+					    int[] FP = new int[contador];
+					    int[] TN = new int[contador];
+					    int[] FN = new int[contador];
+						
+						
+						
+						
 						
 					}
 					if (teclado == 5) {
 						
 					}
 					if (teclado == 6) {
+						
+						seguirViendoAdmin = false;
 						
 					}
 				
@@ -287,6 +311,8 @@ public class Taller1Real {
 				boolean seguirViendoUsuario = true; //
 				
 				while (seguirViendoUsuario) {
+					System.out.println();
+					System.out.println("MENU USUARIO");
 					System.out.println("1) Ver lista de experimentos");
 					System.out.println("2) Mostrar matriz de confusión de un experimento");
 					System.out.println("3) Ver métricas de un experimento");
@@ -524,15 +550,12 @@ public class Taller1Real {
 						
 					}
 					if (teclado == 5) {
+						
 						seguirViendoUsuario = false;						
 						
-					}
-					
-			
-					
+					}													
 				}
 			}
-		}
-		
+		}		
 	}
 }
