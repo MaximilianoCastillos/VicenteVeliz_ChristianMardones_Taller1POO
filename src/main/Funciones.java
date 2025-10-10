@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class Funciones {
     
 	private static List<Vulnerabilidad> listaVulnerabilidades = new ArrayList<>();
-	private static List<PC> listaPCs = new ArrayList<>();
+	public static List<PC> listaPCs = new ArrayList<>();
 	
 	
 	//item 1--------------------------------------------------------------------------------------------------------------------------------------------
@@ -200,13 +200,6 @@ public class Funciones {
 		
 		
 	}
-	
-	
-	
-	
-	
-	
-	
 	//item 3(Admin)-------------------------------------------------------------------------------------------------------------------------------------------------
 
 	 
