@@ -44,7 +44,7 @@ public class main {
 							System.out.println("1) Agregar un nuevo PC");
                             System.out.println("2) Eliminar un PC por ID");
                             System.out.println("3) Volver al Menú Admin");
-                            System.out.println("Ingrese una opción: ");
+                            System.out.print("Ingrese una opción: ");
                             input = scan.nextInt();
                             System.out.println(" ");
                             
@@ -55,6 +55,9 @@ public class main {
                             }
                             if (input == 2 ) {
                             	Funciones.eliminar();
+                            }
+                            if (input == 3) {
+                            	verSubMenu = false;
                             }
 
 						}
@@ -69,34 +72,35 @@ public class main {
 					
 
 
-				}
+				}	
+			}
 			if (input == 2) {
 				boolean seguirViendoUsuario = true;
 				while (seguirViendoUsuario) {
-					System.out.println(" ");
-					System.out.println("1) ver lista de PCs");
-					System.out.println("2) scanear un pc");
-					System.out.println("3) ver total de puertos abiertos ");
-					System.out.println("4) ordenar PCs segun ip");
-					System.out.println("5) salir");
+					menuUsuario.printMenu();
 					input = scan.nextInt();
-
+					
+					if (input == 1) {
+						scan.nextLine();
+						menuUsuario.verListaPCS();
+					}
+					if (input == 2) {
+						scan.nextLine();
+						menuUsuario.escanerPC();
+					}
+					if (input == 3) {
+						scan.nextLine();
+						menuUsuario.puertosAbiertos();
+					}
+					if (input == 4) {
+						scan.nextLine();
+						menuUsuario.ordenarPCsPorClaseIP();
+					}
+					if (input == 5) {
+						seguirViendoUsuario = false;
+					}
 				}
 			}
-			
-			if (input == 3 ) {
-				seguirViendo = false;
-			}
-				
-			}
-
-			
-
 		}
-		
 	}
-	
-	//metodos
-	
-	
 }
