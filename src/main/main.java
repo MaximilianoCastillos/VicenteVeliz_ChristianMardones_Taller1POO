@@ -33,6 +33,40 @@ public class main {
                 
                 if (usuarioActual.getRol().equalsIgnoreCase("Admin")) { //Menu Admin
                 	boolean seguirViendoAdmin = true;
+                	while (seguirViendoAdmin) {
+                		Funciones.menuAdmin();
+                		eleccion = input.nextInt();
+                    	input.nextLine();
+                    	if (eleccion == 1) {
+                    		Funciones.listaPC();
+                    	}
+                    	if (eleccion == 2) {
+                    		Funciones.subMenu();
+                    		eleccion = input.nextInt();
+                    		boolean subMenu = true;
+                    		while(subMenu) {
+                    			if (eleccion == 1) {
+                                	Funciones.agregarPc();
+
+                        		}
+                        		if (eleccion == 2) {
+                        			Funciones.eliminar();
+                        		}
+                        		if (eleccion == 3) {
+                        			subMenu = false;
+                        		}
+                    			
+                    		}
+                    		
+                    	}
+                    	if (eleccion == 3) {
+    						Funciones.clasificarRiesgo();
+
+                    	}
+                    	if (eleccion == 4) {
+                    		seguirViendoAdmin = false;
+                    	}
+                	}
                 }
                 else { //Menu Usuario
                 	boolean seguirViendoUsuario = true;
