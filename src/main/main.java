@@ -81,16 +81,26 @@ public class main {
 					input = scan.nextInt();
 					
 					if (input == 1) {
+						scan.nextLine();
 						menuUsuario.verListaPCS();
 					}
 					if (input == 2) {
+						scan.nextLine();
+						menuUsuario.escanerPC();
+					}
+					if (input == 3) {
+						scan.nextLine();
+						menuUsuario.puertosAbiertos();
+					}
+					if (input == 4) {
+						scan.nextLine();
+						menuUsuario.ordenarPCsPorClaseIP();
+					}
+					if (input == 5) {
+						seguirViendoUsuario = false;
 					}
 				}
 			}
 		}
 	}
-	
-	//metodos
-	
-	
 }
