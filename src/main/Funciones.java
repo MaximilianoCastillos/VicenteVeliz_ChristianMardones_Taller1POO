@@ -294,7 +294,6 @@ public class Funciones {
 	public static void printMenuMain() {
 		System.out.println("1) Ingresar al Sistema");
 		System.out.println("2) Salir");
-		System.out.print("Ingrese eleccion: ");
 	}
 	 
 }
