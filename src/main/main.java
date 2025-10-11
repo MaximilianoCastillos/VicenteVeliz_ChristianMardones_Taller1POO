@@ -1,3 +1,5 @@
+//Integrante 1: Vicente Veliz | Rut : 22.012.230-1 | Carrera: Ingeneria Civil en Computacion e Informatica
+//Integrante 2: Christian Mardones | Rut: 22.026.428-9 | Carrera: Ingeneria Civil en Computacion e Informatica
 package main;
 
 import java.io.File;
@@ -8,8 +10,6 @@ import java.util.Scanner;
 
 
 public class main {
-	
-	
 	public static void main(String[] args) throws FileNotFoundException {
 		Funciones.cargarUsuarios();
 		Funciones.cargarVulnerabilidades();
@@ -22,7 +22,28 @@ public class main {
         
         while (seguirViendo) {
         	Funciones.printMenuMain();
-        	eleccion = input.nextInt();
+        	
+        	while (eleccion < 1 || eleccion > 2) {
+        		try {
+        			System.out.print("Ingrese eleccion: ");
+        			eleccion = input.nextInt();
+        			
+        			input.nextLine();
+        			
+        			if (eleccion < 1 || eleccion > 2) {
+        				System.out.println("");
+        				System.out.println("Ingrese una opcion valida.");
+        				System.out.println("");
+        				
+        			}
+    			} catch (Exception e) {
+    				System.out.println("");
+    				System.out.println("Error: " + e);
+    				System.out.println("Ingrese un valor valido.");
+    				System.out.println("");
+    				input.nextLine();
+    			}
+        	}
         	
         	if (eleccion == 1) {
         		Usuario usuarioActual = null;
@@ -35,25 +56,64 @@ public class main {
                 	boolean seguirViendoAdmin = true;
                 	while (seguirViendoAdmin) {
                 		Funciones.menuAdmin();
-                		eleccion = input.nextInt();
-                    	input.nextLine();
+                		
+                		try {
+                			eleccion = input.nextInt();
+                        	input.nextLine();
+                        	
+                        	if (eleccion < 1 || eleccion > 4 ) {
+                        		System.out.println("");
+                        		System.out.println("Ingrese una opcion valida. ");
+                        		System.out.println("");
+                        	}
+                		} catch (Exception e) {
+							System.out.println("");
+							System.out.println("Error: " + e);
+							System.out.println("Ingrese un valor valido.");
+							System.out.println("");
+							input.nextLine();
+							eleccion = 0;
+						}
+                    	
+                    	
+                    	
                     	if (eleccion == 1) {
                     		Funciones.listaPC();
                     	}
                     	if (eleccion == 2) {
-                    		Funciones.subMenu();
-                    		eleccion = input.nextInt();
                     		boolean subMenu = true;
                     		while(subMenu) {
-                    			if (eleccion == 1) {
+                    			Funciones.subMenu();
+                    			try {
+                        			eleccion = input.nextInt();
+                                	input.nextLine();
+                                	
+                                	if (eleccion < 1 || eleccion > 3 ) {
+                                		System.out.println("");
+                                		System.out.println("Ingrese una opcion valida. ");
+                                		System.out.println("");
+                                	}
+                        		} catch (Exception e) {
+        							System.out.println("");
+        							System.out.println("Error: " + e);
+        							System.out.println("Ingrese un valor valido.");
+        							System.out.println("");
+        							input.nextLine();
+        							eleccion = 0;
+        						}
+                    			
+                        		if (eleccion == 1) {
                                 	Funciones.agregarPc();
+                                	eleccion = 0;
 
                         		}
                         		if (eleccion == 2) {
                         			Funciones.eliminar();
+                        			eleccion = 0;
                         		}
                         		if (eleccion == 3) {
                         			subMenu = false;
+                        			eleccion = 0;
                         		}
                     			
                     		}
@@ -72,14 +132,29 @@ public class main {
                 	boolean seguirViendoUsuario = true;
                 	while (seguirViendoUsuario) {
                 		menuUsuario.printMenu();
-                		eleccion = input.nextInt();
-                		input.nextLine();
+                		try {
+                			eleccion = input.nextInt();
+                        	input.nextLine();
+                        	
+                        	if (eleccion < 1 || eleccion > 5 ) {
+                        		System.out.println("");
+                        		System.out.println("Ingrese una opcion valida. ");
+                        		System.out.println("");
+                        	}
+                		} catch (Exception e) {
+							System.out.println("");
+							System.out.println("Error: " + e);
+							System.out.println("Ingrese un valor valido.");
+							System.out.println("");
+							input.nextLine();
+							eleccion = 0;
+						}
                 		
                 		if (eleccion == 1) {
                 			menuUsuario.verListaPCS();
                 		}
                 		if (eleccion == 2) {
-                			menuUsuario.escanerPC();
+                			menuUsuario.escanerPC(usuarioActual);
                 		}
                 		if (eleccion == 3) {
                 			menuUsuario.puertosAbiertos();
@@ -93,7 +168,6 @@ public class main {
                 	}
                 }
         	}
-        	
         	if (eleccion == 2) {
         		break;
         	}
