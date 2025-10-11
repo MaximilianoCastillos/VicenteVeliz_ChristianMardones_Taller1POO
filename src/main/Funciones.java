@@ -14,6 +14,22 @@ public class Funciones {
 	public static List<PC> listaPCs = new ArrayList<>();
 	public static List<Usuario> listaUsuarios = new ArrayList<>();
 	
+	public static void menuAdmin() {
+		System.out.println(" ");
+		System.out.println("1) ver lista completa de PCs: ");
+		System.out.println("2) AGREGAR O ELIMINAR: ");
+		System.out.println("3) clasificar PCs segun Nivel: ");
+		System.out.println("4) salir: ");
+	}
+	public static void subMenu() {
+        System.out.println(" ");
+		System.out.println("1) Agregar un nuevo PC");
+        System.out.println("2) Eliminar un PC por ID");
+        System.out.println("3) Volver al Menú Admin");
+        System.out.println("Ingrese una opción: ");
+        
+	}
+	
 	
 	//item 1--------------------------------------------------------------------------------------------------------------------------------------------
 	public static void cargarUsuarios() throws FileNotFoundException {
