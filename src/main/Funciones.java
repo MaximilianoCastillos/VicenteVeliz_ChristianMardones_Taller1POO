@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class Funciones {
     
 	private static List<Vulnerabilidad> listaVulnerabilidades = new ArrayList<>();
-	private static List<PC> listaPCs = new ArrayList<>();
+	public static List<PC> listaPCs = new ArrayList<>();
 	
 	
 	//item 1--------------------------------------------------------------------------------------------------------------------------------------------
@@ -197,16 +197,27 @@ public class Funciones {
 			System.out.println("el nivel es " + nivel);
 			System.out.println(" ");
 		}
-		
-		
 	}
-	
-	
-	
-	
-	
-	
-	
+	public static String obtenerClaseIP(String ip) {
+	    try {
+	        // separar la IP por puntos
+	        String[] partes = ip.split("\\.");
+	        int primerNumero = Integer.parseInt(partes[0]);
+
+	        if (primerNumero >= 0 && primerNumero <= 127) {
+	            return "A";
+	        } else if (primerNumero >= 128 && primerNumero <= 191) {
+	            return "B";
+	        } else if (primerNumero >= 192 && primerNumero <= 223) {
+	            return "C";
+	        } else {
+	            return "Desconocida";
+	        }
+
+	    } catch (Exception e) {
+	        return "Desconocida";
+	    }
+	}
 	//item 3(Admin)-------------------------------------------------------------------------------------------------------------------------------------------------
 
 	 
