@@ -2,7 +2,9 @@ package main;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.security.MessageDigest;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 import java.util.Scanner;
 
@@ -10,9 +12,28 @@ public class Funciones {
     
 	private static List<Vulnerabilidad> listaVulnerabilidades = new ArrayList<>();
 	public static List<PC> listaPCs = new ArrayList<>();
+	public static List<Usuario> listaUsuarios = new ArrayList<>();
 	
 	
 	//item 1--------------------------------------------------------------------------------------------------------------------------------------------
+	public static void cargarUsuarios() throws FileNotFoundException {
+		File archivo = new File("archivos/usuarios.txt");
+		Scanner lector = new Scanner(archivo);
+		
+		while(lector.hasNextLine()) {
+			String linea = lector.nextLine();
+			String[] partes = linea.split(";");
+			String usuario = partes[0];
+			String contraseña = partes[1];
+			String rol = partes[2];
+			
+			Usuario p = new Usuario(usuario, contraseña, rol);
+			
+			listaUsuarios.add(p);
+		}
+		lector.close();
+	}
+	
 	public static void cargarVulnerabilidades() throws FileNotFoundException {
 		File archivo = new File("archivos/vulnerabilidades.txt"); 
 		Scanner lector = new Scanner(archivo);
@@ -219,6 +240,45 @@ public class Funciones {
 	    }
 	}
 	//item 3(Admin)-------------------------------------------------------------------------------------------------------------------------------------------------
+	public static String decodificarContraseña(String texto) {
+		try {
+			MessageDigest md = MessageDigest.getInstance("SHA-256");
+			byte[] hashBytes = md.digest(texto.getBytes());
+			return Base64.getEncoder().encodeToString(hashBytes);
+		} catch (Exception e) {
+			return null;
+		}
+	}
+	
+	public static Usuario login() {
+	    Scanner scan = new Scanner(System.in);
+	    System.out.println("===== INICIO DE SESIÓN =====");
 
+	    System.out.print("Usuario: ");
+	    String nombreIngresado = scan.nextLine().trim();
+
+	    System.out.print("Contraseña: ");
+	    String passIngresada = scan.nextLine().trim();
+
+	    // Hashear la contraseña ingresada
+	    String hashIngresado = decodificarContraseña(passIngresada);
+
+	    // Buscar usuario en la lista
+	    for (Usuario u : listaUsuarios) {
+	        if (u.getUsername().equalsIgnoreCase(nombreIngresado) && u.getContraseña().equals(hashIngresado)) {
+	            System.out.println("Ingresado " + u.getUsername() + " (" + u.getRol() + ")");
+	            return u;
+	        }
+	    }
+
+	    System.out.println("Usuario o contraseña incorrectos.");
+	    return null;
+	}
+	
+	public static void printMenuMain() {
+		System.out.println("1) Ingresar al Sistema");
+		System.out.println("2) Salir");
+		System.out.print("Ingrese eleccion: ");
+	}
 	 
 }
