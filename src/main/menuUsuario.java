@@ -31,7 +31,7 @@ public class menuUsuario {
 		System.out.println("");
 	}
 	//Escanear PCS
-	public static void escanerPC() {
+	public static void escanerPC(Usuario a) {
 		System.out.println("--------- ESCANEAR PC'S --------- ");
 		for (PC p : Funciones.listaPCs) {
 			System.out.println("PC " + p.getId() + "|" + "IP = " + p.getIp() + "|" +   "SO = " + p.getSo());
@@ -97,6 +97,7 @@ public class menuUsuario {
         
         //Crear archivo de reporte
         String reporte = "====================================\n";
+        reporte += "Usuario: " + a.getUsername() + "\n";
         reporte += "PC: " + pcSeleccionado.getId() + " | IP: " + pcSeleccionado.getIp() + " | SO: " + pcSeleccionado.getSo() + "\n";
         reporte += "Nivel de riesgo: " + riesgo + "\n";
         reporte += "Puertos:\n" + detallePuertos;
