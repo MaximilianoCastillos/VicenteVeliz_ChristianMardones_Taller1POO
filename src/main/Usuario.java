@@ -1,6 +1,6 @@
 package main;
 
-public class Usuario {
+public abstract class Usuario {
 	private String username;
 	private String contraseña;
 	private String rol;
@@ -22,4 +22,13 @@ public class Usuario {
 	public String getRol() {
 		return rol;
 	}
+	
+    public abstract void mostrarPermisos();
+
+	
+	
+	
+	
+	
+
 }
