@@ -6,10 +6,43 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+
 public class Funciones {
 	private static List<Usuario> listaUsuarios = new ArrayList<>();
 	private static List<Proyecto> listaProyectos = new ArrayList<>();
 	private  static List<Tarea> listaTareas = new ArrayList<>();
+	
+	
+	public static Usuario login() {
+		Scanner scan = new Scanner(System.in);
+		
+		System.out.print("Usuario: ");
+		String usuario = scan.nextLine();
+		System.out.println("Contraseña: ");
+		String contra = scan.nextLine();		
+		
+		Usuario user = null;
+		
+		for (Usuario u : listaUsuarios) {
+			if (u.getUsername().equalsIgnoreCase(usuario) && u.getContraseña().equalsIgnoreCase(contra)) {
+				user = u;
+				break;
+			}
+		}
+		
+		if (user != null) {
+			System.out.println("Buena " + user.getUsername());
+		}
+		
+		if (user == null) {
+			System.out.println("User o contra incorrecta ");
+		}
+		
+		
+		return user;
+	}
+	
+	
 	
 	public static void cargarUsuarios() throws FileNotFoundException {
 		File arch = new File("archivos/usuarios.txt");
@@ -30,8 +63,10 @@ public class Funciones {
 			}
 			
 			if (rl.equalsIgnoreCase("Colaborador")) {
-				
+				u = new Colaborador(user, contra);
 			}
+			
+			listaUsuarios.add(u);
 			
 			
 		}
@@ -124,5 +159,8 @@ public class Funciones {
 		
 		}
 	}
+	
+	
+	
 
 }

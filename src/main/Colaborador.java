@@ -12,5 +12,12 @@ public class Colaborador extends Usuario {
 
 		
 	}
+	
+	public static void menuColaborador() {
+		System.out.println("\n--- MENÚ COLABORADOR ---");
+        System.out.println("1) Ver mis tareas");
+        System.out.println("2) Salir");
+        System.out.print("Elija una opción: ");
+	}
 
 }
