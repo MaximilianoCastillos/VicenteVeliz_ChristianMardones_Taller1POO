@@ -84,6 +84,7 @@ public abstract class Tarea {
 	}
 	
 	public abstract void Accion();
+	public abstract void accept(TareaVisitor v);
 	
 	
 	

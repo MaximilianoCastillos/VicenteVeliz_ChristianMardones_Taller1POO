@@ -12,7 +12,6 @@ public class Funciones {
 	private static List<Proyecto> listaProyectos = new ArrayList<>();
 	private  static List<Tarea> listaTareas = new ArrayList<>();
 	
-	
 	public static Usuario login() {
 		Scanner scan = new Scanner(System.in);
 		
@@ -29,20 +28,15 @@ public class Funciones {
 				break;
 			}
 		}
-		
 		if (user != null) {
 			System.out.println("Buena " + user.getUsername());
 		}
-		
 		if (user == null) {
 			System.out.println("User o contra incorrecta ");
 		}
 		
-		
 		return user;
 	}
-	
-	
 	
 	public static void cargarUsuarios() throws FileNotFoundException {
 		File arch = new File("archivos/usuarios.txt");
@@ -59,21 +53,14 @@ public class Funciones {
 			
 			if (rl.equalsIgnoreCase("Administrador")) {
 				u = new Administrador(user, contra);
-				
 			}
 			
 			if (rl.equalsIgnoreCase("Colaborador")) {
 				u = new Colaborador(user, contra);
 			}
-			
 			listaUsuarios.add(u);
-			
-			
 		}
-		
 		scan.close();
-
-		
 	}
 	
 	public static void cargarProyectos() throws FileNotFoundException {
@@ -97,14 +84,8 @@ public class Funciones {
 
 				}
 			}
-			
 			listaProyectos.add(p);
-			
-			
-		
-		
 		}
-
 	}
 	
 	public static void cargarTareas() throws FileNotFoundException {
@@ -134,33 +115,22 @@ public class Funciones {
 			}
 			if(tipo.equalsIgnoreCase("Documentacion")) {
 				t = new Documentacion(id, tipo, descripcion, estado, complejidad, fecha);
-			}
-			
+			}	
 			
 			for (Proyecto p : listaProyectos) {
 				if (p.getId().equalsIgnoreCase(proyecto)) {
 					t.setProyecto(p);
 					p.getListaTarea().add(t);
 					break;
-
 				}
 			}
-			
 			for (Usuario u : listaUsuarios) {
 				if (u.getUsername().equalsIgnoreCase(responsable)) {
 					t.setUsuario(u);
 					break;
 				}
 			}
-			
 			listaTareas.add(t);
-			
-			
-		
 		}
 	}
-	
-	
-	
-
 }
