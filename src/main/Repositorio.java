@@ -51,7 +51,7 @@ public class Repositorio {
                 if (linea == null || linea.trim().isEmpty()) {
                     // Si la línea está vacía, no hace nada y pasa a la siguiente
                 } else {
-                    String[] p = linea.split(";");
+                    String[] p = linea.split("\\|");
                     if (p.length >= 3) {
                         String user = p[0].trim();
                         String pass = p[1].trim();
@@ -75,7 +75,7 @@ public class Repositorio {
                 if (linea == null || linea.trim().isEmpty()) {
                     // No hace nada
                 } else {
-                    String[] p = linea.split(";");
+                    String[] p = linea.split("\\|");
                     if (p.length >= 3) {
                         Proyecto pr = new Proyecto(p[0].trim(), p[1].trim());
                         String responsable = p[2].trim();
@@ -102,7 +102,7 @@ public class Repositorio {
                 if (linea == null || linea.trim().isEmpty()) {
                     // No hace nada
                 } else {
-                    String[] partes = linea.split(";");
+                    String[] partes = linea.split("\\|");
                     if (partes.length >= 8) {
                         String idProyecto   = partes[0].trim();
                         String id           = partes[1].trim();
