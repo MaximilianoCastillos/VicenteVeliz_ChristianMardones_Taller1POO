@@ -6,9 +6,11 @@ import java.util.Scanner;
 public class Main {
 
 	public static void main(String[] args) throws FileNotFoundException {
-		Funciones.cargarUsuarios();
-		Funciones.cargarProyectos();
-		Funciones.cargarTareas();
+		
+		Repositorio repo = Repositorio.getInstance();
+		repo.cargarUsuarios();
+		repo.cargarProyectos();
+		repo.cargarTareas();
 		
 		Usuario revisar = null;
 		Scanner scan = new Scanner(System.in);

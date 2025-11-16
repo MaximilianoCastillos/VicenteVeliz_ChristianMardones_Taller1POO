@@ -18,4 +18,10 @@ public class Bug extends Tarea {
 		return prioridad;
 	}
 
+	@Override
+	public void accept(TareaVisitor v) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
