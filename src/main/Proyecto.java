@@ -41,6 +41,15 @@ public class Proyecto {
 	public Usuario getUsuario() {
 		return usuario;
 	}
+	
+	public String getUsuarioUsername() {
+		if (this.usuario != null) {
+			return this.usuario.getUsername();
+		}
+		else {
+			return "Sin responsable";
+		}
+	}
 
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
