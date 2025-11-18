@@ -16,18 +16,13 @@ public class Main {
 		Scanner scan = new Scanner(System.in);
 		Scanner eleccion = new Scanner(System.in);
 
-
-		
-		
 		boolean seguirPrograma = true;
 		
 		while (seguirPrograma) {
 			while (revisar == null) {
 				revisar = Funciones.login();
-				
 			}
 			System.out.println("Su rol es " + revisar.getRol());
-			
 			
 			if (revisar.getRol().equalsIgnoreCase("Administrador")) {
 				Administrador admin = (Administrador) revisar;
@@ -35,13 +30,13 @@ public class Main {
 				admin.menuAdmin();
 				int opcion = 0;
 				
-				System.out.print("eliga una opcion: ");
+				System.out.print("Elija una opcion: ");
 				opcion = eleccion.nextInt();
 				
 				switch (opcion) {
-					case 1 :	
+					case 1 :
+						admin.listaProyectoTareas();
 						break;
-						
 					case 2 :
 						break;
 					
@@ -52,16 +47,11 @@ public class Main {
 					default:
 						System.out.println(" ");
 						System.out.println("------------");
-						System.out.println("opcion invalida");
+						System.out.println("Opcion invalida");
 						System.out.println("------------");
 						System.out.println(" ");
-
-
-						
 				}
-				
 			}
-			
 			if (revisar.getRol().equalsIgnoreCase("Colaborador")) {
 				Colaborador cola = (Colaborador) revisar;
 				cola.menuColaborador();
@@ -78,15 +68,13 @@ public class Main {
 						break;
 					
 					default:
-						System.out.println("opcion invalida");
-						
+						System.out.println(" ");
+						System.out.println("------------");
+						System.out.println("Opcion invalida");
+						System.out.println("------------");
+						System.out.println(" ");			
 				}
 			}
-			
-			
 		}
 	}
-	
-	
-
 }
