@@ -1,5 +1,6 @@
 package main;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
@@ -241,6 +242,18 @@ public class Administrador extends Usuario {
 				}
 			}
 			
+			if (tipoTarea.equalsIgnoreCase("bug")) {
+				tipoTarea = "Bug";
+			}
+			
+			else if (tipoTarea.equalsIgnoreCase("feature")) {
+				tipoTarea = "Feature";
+			}
+			
+			else {
+				tipoTarea = "Documentacion";
+			}
+			
 			System.out.print("Ingrese una descripcion: ");
 			String descripcionTarea = input.nextLine();
 			
@@ -249,11 +262,24 @@ public class Administrador extends Usuario {
 			while (!estadoTarea.equals("pendiente") && !estadoTarea.equals("enprogreso") && !estadoTarea.equals("completada")) {
 				System.out.print("Ingrese el estado inicial de su tarea: ");
 				estadoTarea = input.nextLine().strip().toLowerCase();
+				estadoTarea = estadoTarea.replace(" ", "");
 				
 				if (!estadoTarea.equals("pendiente") && !estadoTarea.equals("enprogreso") && !estadoTarea.equals("completada")) {
 					System.out.println("Ingrese un tipo de estado inicial valido");
 					System.out.println();
 				}
+			}
+			
+			if (estadoTarea.equals("pendiente")) {
+				estadoTarea = "Pendiente";
+			}
+			
+			else if (estadoTarea.equals("enprogreso")) {
+				estadoTarea = "En Progreso";
+			}
+			
+			else {
+				estadoTarea = "Completada";
 			}
 			
 			System.out.print("Ingrese a un responsable: ");
@@ -415,5 +441,103 @@ public class Administrador extends Usuario {
 		default:
 			break;
 		}
+	}
+	public void asignarPrioridades() {
+	    Repositorio repo = Repositorio.getInstance();
+	    Scanner input = new Scanner(System.in);
+
+	    System.out.println("\n=== ASIGNAR PRIORIDADES A TAREAS ===");
+
+	    // 1) Seleccionar proyecto
+	    System.out.print("Ingrese el ID numérico del proyecto (ej: 1 para PR001): ");
+	    int idNum = input.nextInt();
+	    input.nextLine(); // limpiar ENTER
+
+	    String idProyecto = "PR" + String.format("%03d", idNum);
+
+	    Proyecto proyectoElegido = null;
+
+	    for (Proyecto p : repo.getProyectos()) {
+	        if (p.getId().equalsIgnoreCase(idProyecto)) {
+	            proyectoElegido = p;
+	            break;
+	        }
+	    }
+
+	    if (proyectoElegido == null) {
+	        System.out.println("No se encontro ese proyecto.");
+	        return;
+	    }
+
+	    if (proyectoElegido.getListaTarea().isEmpty()) {
+	        System.out.println("El proyecto no tiene tareas para ordenar.");
+	        return;
+	    }
+
+	    // 2) Menú de estrategia
+	    System.out.println("\nProyecto encontrado: " + proyectoElegido.getNombre());
+	    System.out.println("¿Cómo desea priorizar las tareas?");
+	    System.out.println("1) Por fecha");
+	    System.out.println("2) Por tipo (impacto)");
+	    System.out.println("3) Por complejidad");
+	    System.out.print("Opción: ");
+
+	    int opcion = input.nextInt();
+	    input.nextLine();
+
+	    
+	    // 3) Crear la estrategia correcta (tus clases reales)
+	    PrioridadStrategy estrategia = null;
+
+	    switch (opcion) {
+	        case 1:
+	            estrategia = new PrioridadPorFecha();
+	            break;
+	        case 2:
+	            estrategia = new PrioridadPorImpacto();
+	            break;
+	        case 3:
+	            estrategia = new PrioridadPorComplejidad();
+	            break;
+	        default:
+	            System.out.println("Opción inválida.");
+	            return;
+	    }
+
+	    // 4) Aplicar la estrategia
+	    ArrayList<Tarea> tareasOrdenadas = new ArrayList<>(
+	            estrategia.ordenar(proyectoElegido.getListaTarea())
+	    );
+
+	    // 5) Actualizar el proyecto con las tareas ordenadas
+	    proyectoElegido.setListaTarea(tareasOrdenadas);
+
+	    System.out.println("\n Tareas ordenadas exitosamente:");
+	    for (Tarea t : tareasOrdenadas) {
+	        System.out.println(t);
+	    }
+
+	    System.out.println();
+	}
+	public void generarReporte() {
+	    Repositorio repo = Repositorio.getInstance();
+	    Scanner input = new Scanner(System.in);
+
+	    System.out.println("\n=== GENERAR REPORTE DE PROYECTOS ===");
+
+	    System.out.print("Ingrese el nombre del archivo (sin extensión): ");
+	    String nombre = input.nextLine().trim();
+
+	    if (nombre.isEmpty()) {
+	        System.out.println("Nombre inválido.");
+	        return;
+	    }
+
+	    // El archivo se guardará como archivos/<nombre>.txt
+	    String ruta = "archivos" + File.separator + nombre + ".txt";
+
+	    repo.guardarReporte(ruta);
+
+	    System.out.println("\n Reporte generado en: " + ruta + "\n");
 	}
 }

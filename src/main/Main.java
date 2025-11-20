@@ -41,6 +41,12 @@ public class Main {
 					case 3 :
 						admin.gestionarTareas();
 						break;
+					case 4:
+					    admin.asignarPrioridades();
+					    break;
+					case 5:
+						admin.generarReporte();
+						break;
 					case 6:
 						revisar = null;
 						break;
