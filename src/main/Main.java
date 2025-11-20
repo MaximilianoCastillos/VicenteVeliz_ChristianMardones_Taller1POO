@@ -22,8 +22,6 @@ public class Main {
 			while (revisar == null) {
 				revisar = Funciones.login();
 			}
-			System.out.println("Su rol es " + revisar.getRol());
-			
 			if (revisar.getRol().equalsIgnoreCase("Administrador")) {
 				Administrador admin = (Administrador) revisar;
 				
@@ -38,9 +36,18 @@ public class Main {
 						admin.listaProyectoTareas();
 						break;
 					case 2 :
+						admin.gestionerProyectos();
 						break;
-					
-					case 3:
+					case 3 :
+						admin.gestionarTareas();
+						break;
+					case 4:
+					    admin.asignarPrioridades();
+					    break;
+					case 5:
+						admin.generarReporte();
+						break;
+					case 6:
 						revisar = null;
 						break;
 						
