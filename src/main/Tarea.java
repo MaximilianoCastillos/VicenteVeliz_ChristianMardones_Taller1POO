@@ -78,6 +78,15 @@ public abstract class Tarea {
 	public Usuario getUsuario() {
 		return usuario;
 	}
+	
+	public String getUsuarioUsername() {
+		if (this.usuario != null) {
+			return this.usuario.getUsername();
+		}
+		else {
+			return "Sin responsable";
+		}
+	}
 
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
@@ -85,6 +94,12 @@ public abstract class Tarea {
 	
 	public abstract void Accion();
 	public abstract void accept(TareaVisitor v);
+
+	@Override
+	public String toString() {
+		return id + "|" + tipo + "|" + descripcion + "|" + estado + "|"
+				+ "Usuario =" + usuario.getUsername() + "|" + complejidad + "|" + fecha;
+	}
 	
 	
 	

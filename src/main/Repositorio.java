@@ -39,8 +39,16 @@ public class Repositorio {
     	return proyectos; 
     }
     
+    public void setProyectos(List<Proyecto> nuevosProyectos) {
+    	this.proyectos = nuevosProyectos;
+    }
+    
     public List<Tarea> getTareas() { 
     	return tareas;
+    }
+    
+    public void setTareas(List<Tarea> nuevasTareas) {
+    	this.tareas = nuevasTareas;
     }
     
     public void cargarUsuarios() throws FileNotFoundException {
@@ -49,7 +57,7 @@ public class Repositorio {
             while (input.hasNextLine()) {
                 String linea = input.nextLine();
                 if (linea == null || linea.trim().isEmpty()) {
-                    // Si la línea está vacía, no hace nada y pasa a la siguiente
+                    // Si la linea esta vacia, no hace nada y pasa a la siguiente
                 } else {
                     String[] p = linea.split("\\|");
                     if (p.length >= 3) {
@@ -81,11 +89,21 @@ public class Repositorio {
                         String responsable = p[2].trim();
 
                         // Asignar usuario responsable si existe
+                        
+                        Usuario encontrado = null;
+                        
                         for (Usuario u : usuarios) {
                             if (u.getUsername().equalsIgnoreCase(responsable)) {
-                                pr.setUsuario(u);
+                                encontrado = u;
                                 break;
                             }
+                        }
+                        
+                        if (encontrado != null) {
+                        	pr.setUsuario(encontrado);
+                        }
+                        else {
+                        	pr.setUsuario(new UsuariosNoArchivados(responsable, null, null));
                         }
                         proyectos.add(pr);
                     }
