@@ -1,6 +1,6 @@
 package main;
 
-public class TareaFactory {
+public class TareaFactory /** encargada de crear los objetos de tipo Bug,Fetaure,Documentacion*/ {
 	
 	public static Tarea crear(String tipo, String id, String descripcion, String estado, String complejidad, String fecha) {
 		String t = tipo == null ? "" : tipo.trim().toLowerCase();

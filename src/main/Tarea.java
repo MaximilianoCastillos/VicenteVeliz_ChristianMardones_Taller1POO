@@ -1,6 +1,6 @@
 package main;
 
-public abstract class Tarea {
+public abstract class Tarea /** clase base y sus subclases son bug, feature,documentacion*/{
 	private Proyecto proyecto;
 	private String id;
 	private String tipo;

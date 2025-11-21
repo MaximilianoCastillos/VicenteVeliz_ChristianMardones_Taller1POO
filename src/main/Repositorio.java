@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-//Esta clase servirá como Singleton
+/**Esta clase servirá como Singleton*/
 public class Repositorio {
 	
 	private static Repositorio instance;
@@ -57,7 +57,7 @@ public class Repositorio {
             while (input.hasNextLine()) {
                 String linea = input.nextLine();
                 if (linea == null || linea.trim().isEmpty()) {
-                    // Si la linea esta vacia, no hace nada y pasa a la siguiente
+                    /** Si la linea esta vacia, no hace nada y pasa a la siguiente*/
                 } else {
                     String[] p = linea.split("\\|");
                     if (p.length >= 3) {
@@ -81,18 +81,18 @@ public class Repositorio {
             while (input.hasNextLine()) {
                 String linea = input.nextLine();
                 if (linea == null || linea.trim().isEmpty()) {
-                    // No hace nada
+                	
                 } else {
                     String[] p = linea.split("\\|");
                     if (p.length >= 3) {
                         Proyecto pr = new Proyecto(p[0].trim(), p[1].trim());
                         String responsable = p[2].trim();
 
-                        // Asignar usuario responsable si existe
+                        /** Asignar usuario responsable si existe*/
                         
                         Usuario encontrado = null;
                         
-                        for (Usuario u : usuarios) {
+                        for (Usuario u : usuarios)/** pasa por todos los usuarios  y compara si es que coincide con el responsable*/{
                             if (u.getUsername().equalsIgnoreCase(responsable)) {
                                 encontrado = u;
                                 break;
@@ -131,9 +131,9 @@ public class Repositorio {
                         String complejidad  = partes[6].trim();
                         String fecha        = partes[7].trim();
 
-                        Tarea t = TareaFactory.crear(tipo, id, descripcion, estado, complejidad, fecha);
+                        Tarea t = TareaFactory.crear(tipo, id, descripcion, estado, complejidad, fecha);/**crea un objeta de tipo tareaFactory*/
 
-                        // Vincular proyecto
+                        /** Vincular proyecto*/
                         for (Proyecto pr : proyectos) {
                             if (pr.getId().equals(idProyecto)) {
                                 t.setProyecto(pr);
@@ -142,7 +142,7 @@ public class Repositorio {
                             }
                         }
 
-                        // Vincular usuario
+                        /** Vincular usuario*/
                         for (Usuario u : usuarios) {
                             if (u.getUsername().equalsIgnoreCase(responsable)) {
                                 t.setUsuario(u);
@@ -162,7 +162,7 @@ public class Repositorio {
             File archivo = new File(nombreArchivo);
             FileWriter escritor = new FileWriter(archivo);
 
-            for (Proyecto pr : proyectos) {
+            for (Proyecto pr : proyectos) /** recorre los poryectos con un "pivote" que es pr */{
                 escritor.write("Proyecto " + pr.getId() + " - " + pr.getNombre() +
                         " (Resp: " + (pr.getUsuario() != null ? pr.getUsuario().getUsername() : "N/A") + ")\n");
 

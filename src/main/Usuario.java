@@ -1,6 +1,6 @@
 package main;
 
-public abstract class Usuario {
+public abstract class Usuario /** clase base de colaborador y administrador */{
 	private String username;
 	private String contraseña;
 	private String rol;

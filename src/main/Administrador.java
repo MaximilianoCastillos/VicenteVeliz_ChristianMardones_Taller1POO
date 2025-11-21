@@ -28,12 +28,12 @@ public class Administrador extends Usuario {
 	    System.out.print("Elija una opción: ");
 	}
 	
-	public void listaProyectoTareas() {
+	public void listaProyectoTareas() {   /***/
 		System.out.println("Proyectos: " + "\n");
-		Repositorio repo = Repositorio.getInstance(); //Obtiene la instancia del repositorio
-		ArrayList<Proyecto> proyectos = (ArrayList<Proyecto>) repo.getProyectos(); //Llama al repositorio para obtener lista de proyectos
+		Repositorio repo = Repositorio.getInstance();    /**Obtiene la instancia del repositorio */
+		ArrayList<Proyecto> proyectos = (ArrayList<Proyecto>) repo.getProyectos(); /**Llama al repositorio para obtener lista de proyectos*/
 		
-		if (proyectos.isEmpty()) { //Si la lista esta vacia retorna un mensaje y se termina la funcion
+		if (proyectos.isEmpty()) { /**Si la lista esta vacia retorna un mensaje y se termina la funcion*/
 			System.out.println("Lista de proyectos esta vacia. ");
 			return;
 		}
@@ -80,16 +80,16 @@ public class Administrador extends Usuario {
 		}
 		
 		switch (eleccion) {
-		case 1: //Agregar un proyecto
+		case 1: /**Agregar un proyecto*/
 			input.nextLine();
 			
 			System.out.println();
-			System.out.println("Ingrese el nombre del proyecto: "); //Ingresar datos del proyecto
+			System.out.println("Ingrese el nombre del proyecto: "); /**Ingresar datos del proyecto*/
 			String nombre = input.nextLine();
 			System.out.println("Ingrese el responsable de este proyecto: ");
 			String usuario = input.nextLine();
 			
-			Repositorio repo = Repositorio.getInstance(); //Obtener instancia de los repositorios
+			Repositorio repo = Repositorio.getInstance(); /**Obtener instancia de los repositorios*/
 			
 			ArrayList<Usuario> usuarios = (ArrayList<Usuario>) repo.getUsuarios(); 
 			
@@ -105,27 +105,27 @@ public class Administrador extends Usuario {
 				}
 			}
 			
-			if (!usuarioEncontrado) { //Si no se encuentran se crea un nuevo usuario no archivado
+			if (!usuarioEncontrado) { /**Si no se encuentran se crea un nuevo usuario no archivado*/
 				usuarioFinal = new UsuariosNoArchivados(usuario, null, null);
 			}
 			
-			ArrayList<Proyecto> nuevosProyectos = (ArrayList<Proyecto>) repo.getProyectos(); // Cargar lista de proyectos
+			ArrayList<Proyecto> nuevosProyectos = (ArrayList<Proyecto>) repo.getProyectos(); /** Cargar lista de proyectos*/
 			
-			String ultimaid = nuevosProyectos.getLast().getId(); // Obtener la ultima id
+			String ultimaid = nuevosProyectos.getLast().getId(); /**Obtener la ultima id*/
 			
-			 if (ultimaid.contains("00")) { // Si contiene 00 hace esto
-				 String[] partes = ultimaid.split("R00"); // Obtener la ultima id
-				 int id = Integer.valueOf(partes[1]) + 1; //Agregarle un valor mas a la ID
-				 String idString = "PR" + String.format("%03d", id); // Se pone "PR" y dos ceros mas junto al id
+			 if (ultimaid.contains("00")) { /** Si contiene 00 hace esto*/
+				 String[] partes = ultimaid.split("R00"); /**  Obtener la ultima id*/
+				 int id = Integer.valueOf(partes[1]) + 1; /** Agregarle un valor mas a la ID*/
+				 String idString = "PR" + String.format("%03d", id); /** Se pone "PR" y dos ceros mas junto al id*/
 				 
-				 Proyecto p = new Proyecto(idString, nombre); //Se crea el proyecto
+				 Proyecto p = new Proyecto(idString, nombre); /** Se crea el proyecto*/
 				 p.setUsuario(usuarioFinal);
 				 nuevosProyectos.add(p);
 				 repo.setProyectos(nuevosProyectos);
 				 System.out.println("Proyecto agregado con exito! ");
 				 System.out.println();
 			 }
-			 else if (ultimaid.contains("0")) { // Misma cosa que la de arriba pero en caso de que haya un solo cero
+			 else if (ultimaid.contains("0")) { /**  Misma cosa que la de arriba pero en caso de que haya un solo cero*/
 				 String[] partes = ultimaid.split("R0");
 				 int id = Integer.valueOf(partes[1]) + 1;
 				 String idString = "PR" + String.format("%03d", id);
@@ -137,35 +137,35 @@ public class Administrador extends Usuario {
 				 System.out.println("Proyecto agregado con exito! ");
 				 System.out.println();
 			}
-			 else { //Limite de proyectos
+			 else { /** Limite de proyectos*/
 				 System.out.println("No se pueden añadir mas proyectos!"); 
 			 }
 			break;
 		
-		case 2: // Eliminar un proyecto
+		case 2: /** Eliminar un proyecto*/
 			input.nextLine();
 			
 			System.out.println();
 			
 			Repositorio repo1 = Repositorio.getInstance();
-			ArrayList<Proyecto> proyectos = (ArrayList<Proyecto>) repo1.getProyectos(); //Obtener lista de proyectos
-			ArrayList<Tarea> tareas = (ArrayList<Tarea>) repo1.getTareas(); //Obtener lista de tareas
+			ArrayList<Proyecto> proyectos = (ArrayList<Proyecto>) repo1.getProyectos(); /** Obtener lista de proyectos*/
+			ArrayList<Tarea> tareas = (ArrayList<Tarea>) repo1.getTareas(); /** Obtener lista de tareas*/
 			
 			System.out.println("¿Que proyecto desesa eliminar?");
 			System.out.print("Ingresa el id del proyecto: ");
 			int idProyectoAEliminar = input.nextInt();
-			String idString = "PR" + String.format("%03d", idProyectoAEliminar); //Se obtiene el string para que de igual con el string de getId
+			String idString = "PR" + String.format("%03d", idProyectoAEliminar); /**Se obtiene el string para que de igual con el string de getId*/
 			
 			boolean proyectoEliminado = false;
 			
-			for (Proyecto p : proyectos) { //Recorrer lista de proyectos
+			for (Proyecto p : proyectos) { /**  Recorrer lista de proyectos */
 				if (p.getId().equals(idString)) {
-					ArrayList<Tarea> tareasProyecto = (ArrayList<Tarea>) p.getListaTarea(); //se obtiene la lista de tareas en el proyecto
+					ArrayList<Tarea> tareasProyecto = (ArrayList<Tarea>) p.getListaTarea(); /**se obtiene la lista de tareas en el proyecto*/
 					
-					tareas.removeAll(tareasProyecto); // Se remueven las tareas de proyecto en la lista principal de tareas
-					proyectos.remove(p); // Se remueve el proyecto de lista de proyectos
+					tareas.removeAll(tareasProyecto); /** Se remueven las tareas de proyecto en la lista principal de tareas*/
+					proyectos.remove(p); /**  Se remueve el proyecto de lista de proyectos*/
 					
-					repo1.setProyectos(proyectos); // Se agrega la nueva lista
+					repo1.setProyectos(proyectos); /**Se agrega la nueva lista*/
 					repo1.setTareas(tareas);
 					
 					System.out.println("¡Proyecto eliminado con extio!");
@@ -201,7 +201,7 @@ public class Administrador extends Usuario {
 		System.out.println("1) Agregar");
 		System.out.println("2) Eliminar");
 		System.out.println("3) Salir");
-		while (eleccion < 1 || eleccion > 3) {
+		while (eleccion < 1 || eleccion > 3) { /** control de error*/
 			try {
 				System.out.print("Ingrese su respuesta: ");
 				eleccion = input.nextInt();
@@ -214,7 +214,6 @@ public class Administrador extends Usuario {
 				System.out.println("Ingrese un valor valido. ");
 				System.out.println("");
 				input.nextLine();
-				// TODO: handle exception
 			}
 		}
 		
@@ -291,7 +290,7 @@ public class Administrador extends Usuario {
 			
 			Usuario usuarioFinal = null;
 			
-			for (Usuario u : usuarios) { // Encontrar los usuarios por lista
+			for (Usuario u : usuarios) { /** Encontrar los usuarios por lista */
 				if (usuario.equals(u.getUsername())) {
 					usuarioEncontrado = true;
 					usuarioFinal = u;
@@ -299,7 +298,7 @@ public class Administrador extends Usuario {
 				}
 			}
 			
-			if (!usuarioEncontrado) { //Si no se encuentran se crea un nuevo usuario no archivado
+			if (!usuarioEncontrado) { /**Si no se encuentran se crea un nuevo usuario no archivado*/
 				usuarioFinal = new UsuariosNoArchivados(usuario, null, null);
 			}
 			
@@ -308,10 +307,10 @@ public class Administrador extends Usuario {
 			
 			String ultimoIdTareas = ultimasTareas.getLast().getId();
 			
-			if (ultimoIdTareas.contains("00")) { // Si contiene 00 hace esto
-				 String[] partes = ultimoIdTareas.split("T00"); // Obtener la ultima id
-				 int id = Integer.valueOf(partes[1]) + 1; //Agregarle un valor mas a la ID
-				 String idString = "T" + String.format("%03d", id); // Se pone "T" y dos ceros mas junto al id
+			if (ultimoIdTareas.contains("00")) { /** Si contiene 00 hace esto*/
+				 String[] partes = ultimoIdTareas.split("T00"); /** Obtener la ultima id */
+				 int id = Integer.valueOf(partes[1]) + 1; /**Agregarle un valor mas a la ID*/
+				 String idString = "T" + String.format("%03d", id); /** Se pone "T" y dos ceros mas junto al id*/
 				 
 				 String complejidad = "No definido";
 				 
@@ -329,9 +328,9 @@ public class Administrador extends Usuario {
 				 
 				 nuevaTarea.setUsuario(usuarioFinal);
 				 
-				 String idProyectoString = "PR" + String.format("%03d", idProyecto); //Se obtiene el string para que de igual con el string de getId
+				 String idProyectoString = "PR" + String.format("%03d", idProyecto); /**Se obtiene el string para que de igual con el string de getId*/
 				 
-				 for (Proyecto p : nuevoProyectos) { //Recorrer lista de proyectos
+				 for (Proyecto p : nuevoProyectos) { /**Recorrer lista de proyectos*/
 						if (p.getId().equals(idProyectoString)) {
 							ArrayList<Tarea> listaTareaProyecto = (ArrayList<Tarea>) p.getListaTarea();
 							int indice = nuevoProyectos.indexOf(p);
@@ -347,7 +346,7 @@ public class Administrador extends Usuario {
 				 repo.setProyectos(nuevoProyectos);
 				 repo.setTareas(ultimasTareas);
 			 }
-			 else if (ultimoIdTareas.contains("0")) { // Misma cosa que la de arriba pero en caso de que haya un solo cero
+			 else if (ultimoIdTareas.contains("0")) { /** Misma cosa que la de arriba pero en caso de que haya un solo cero*/
 				 String[] partes = ultimoIdTareas.split("T0");
 				 int id = Integer.valueOf(partes[1]) + 1;
 				 String idString = "T" + String.format("%03d", id);
@@ -368,9 +367,9 @@ public class Administrador extends Usuario {
 				 
 				 nuevaTarea.setUsuario(usuarioFinal);
 				 
-				 String idProyectoString = "PR" + String.format("%03d", idProyecto); //Se obtiene el string para que de igual con el string de getId
+				 String idProyectoString = "PR" + String.format("%03d", idProyecto); /**Se obtiene el string para que de igual con el string de getId*/
 				 
-				 for (Proyecto p : nuevoProyectos) { //Recorrer lista de proyectos
+				 for (Proyecto p : nuevoProyectos) { /**Recorrer lista de proyectos*/
 						if (p.getId().equals(idProyectoString)) {
 							ArrayList<Tarea> listaTareaProyecto = (ArrayList<Tarea>) p.getListaTarea();
 							int indice = nuevoProyectos.indexOf(p);
@@ -386,7 +385,7 @@ public class Administrador extends Usuario {
 				 repo.setProyectos(nuevoProyectos);
 				 repo.setTareas(ultimasTareas);
 			}
-			 else { //Limite de proyectos
+			 else { /**Limite de proyectos*/
 				 System.out.println("No se pueden añadir mas tareas!"); 
 			 }
 			break;
@@ -402,9 +401,9 @@ public class Administrador extends Usuario {
 			int idProyecto1 = input.nextInt();
 			
 			
-			 String idProyectoString = "PR" + String.format("%03d", idProyecto1); //Se obtiene el string para que de igual con el string de getId
+			 String idProyectoString = "PR" + String.format("%03d", idProyecto1); /**Se obtiene el string para que de igual con el string de getId*/
 			 
-			 for (Proyecto p : proyectos) { //Recorrer lista de proyectos
+			 for (Proyecto p : proyectos) { /**Recorrer lista de proyectos*/
 				 if (idProyectoString.equals(p.getId())) {
 					 ArrayList<Tarea> tareasProyecto = (ArrayList<Tarea>) p.getListaTarea();
 					 int index = proyectos.indexOf(p);
@@ -448,7 +447,7 @@ public class Administrador extends Usuario {
 
 	    System.out.println("\n=== ASIGNAR PRIORIDADES A TAREAS ===");
 
-	    // 1) Seleccionar proyecto
+	    /** 1) Seleccionar proyecto*/
 	    System.out.print("Ingrese el ID numérico del proyecto (ej: 1 para PR001): ");
 	    int idNum = input.nextInt();
 	    input.nextLine(); // limpiar ENTER
@@ -457,7 +456,7 @@ public class Administrador extends Usuario {
 
 	    Proyecto proyectoElegido = null;
 
-	    for (Proyecto p : repo.getProyectos()) {
+	    for (Proyecto p : repo.getProyectos()) { /** recorrer proyectos y compara*/
 	        if (p.getId().equalsIgnoreCase(idProyecto)) {
 	            proyectoElegido = p;
 	            break;
@@ -474,7 +473,7 @@ public class Administrador extends Usuario {
 	        return;
 	    }
 
-	    // 2) Menú de estrategia
+	    /** 2) Menú de estrategia*/
 	    System.out.println("\nProyecto encontrado: " + proyectoElegido.getNombre());
 	    System.out.println("¿Cómo desea priorizar las tareas?");
 	    System.out.println("1) Por fecha");
@@ -486,7 +485,7 @@ public class Administrador extends Usuario {
 	    input.nextLine();
 
 	    
-	    // 3) Crear la estrategia correcta (tus clases reales)
+	    /** 3) Crear la estrategia correcta (tus clases reales)*/
 	    PrioridadStrategy estrategia = null;
 
 	    switch (opcion) {
@@ -504,16 +503,16 @@ public class Administrador extends Usuario {
 	            return;
 	    }
 
-	    // 4) Aplicar la estrategia
+	    /** 4) Aplicar la estrategia*/
 	    ArrayList<Tarea> tareasOrdenadas = new ArrayList<>(
 	            estrategia.ordenar(proyectoElegido.getListaTarea())
 	    );
 
-	    // 5) Actualizar el proyecto con las tareas ordenadas
+	    /** 5) Actualizar el proyecto con las tareas ordenadas*/
 	    proyectoElegido.setListaTarea(tareasOrdenadas);
 
 	    System.out.println("\n Tareas ordenadas exitosamente:");
-	    for (Tarea t : tareasOrdenadas) {
+	    for (Tarea t : tareasOrdenadas) { /** recorre tareas*/
 	        System.out.println(t);
 	    }
 
@@ -528,12 +527,12 @@ public class Administrador extends Usuario {
 	    System.out.print("Ingrese el nombre del archivo (sin extensión): ");
 	    String nombre = input.nextLine().trim();
 
-	    if (nombre.isEmpty()) {
+	    if (nombre.isEmpty()) /** revisa que no sea vacio */ {
 	        System.out.println("Nombre inválido.");
 	        return;
 	    }
 
-	    // El archivo se guardará como archivos/<nombre>.txt
+	    /**  El archivo se guardará como archivos/<nombre>.txt*/
 	    String ruta = "archivos" + File.separator + nombre + ".txt";
 
 	    repo.guardarReporte(ruta);

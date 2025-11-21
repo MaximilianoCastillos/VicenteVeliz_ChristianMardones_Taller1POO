@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Funciones {
 
     
-    public static Usuario login() {
+    public static Usuario login() /** fue creado para hacer login y revisar si esta dentro del sistema*/{
         Scanner scan = new Scanner(System.in); 
 
         System.out.print("Usuario: ");
@@ -17,7 +17,7 @@ public class Funciones {
         Repositorio repo = Repositorio.getInstance();
         Usuario user = null;
 
-        // Buscar usuario en la lista cargada del repositorio
+        /** Buscar usuario en la lista cargada del repositorio*/
         for (Usuario u : repo.getUsuarios()) {
             if (u.getUsername().equalsIgnoreCase(usuario) && u.getContraseña().equalsIgnoreCase(contra)) {
                 user = u;

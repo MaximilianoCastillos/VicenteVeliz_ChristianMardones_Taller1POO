@@ -1,6 +1,6 @@
 package main;
 
-public class Feature extends Tarea {
+public class Feature extends Tarea/** la clase feature es una subclase que extiende de tarea */ {
 	private String prioridad;
 
 	public Feature(String id, String tipo, String descripcion, String estado, String complejidad, String fecha) {
@@ -20,8 +20,7 @@ public class Feature extends Tarea {
 
 	@Override
 	public void accept(TareaVisitor v) {
-		// TODO Auto-generated method stub
-		
+		v.visit(this);		
 	}
 
 }

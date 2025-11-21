@@ -18,20 +18,20 @@ public class Main {
 
 		boolean seguirPrograma = true;
 		
-		while (seguirPrograma) {
+		while (seguirPrograma) /** mantiene activa el programa hasta que se desee salir*/{
 			while (revisar == null) {
 				revisar = Funciones.login();
 			}
-			if (revisar.getRol().equalsIgnoreCase("Administrador")) {
+			if (revisar.getRol().equalsIgnoreCase("Administrador"))/** en caso que el usuario sea administrador entra por aca*/ {
 				Administrador admin = (Administrador) revisar;
 				
-				admin.menuAdmin();
+				admin.menuAdmin()/** muestra el menu constantemente*/;
 				int opcion = 0;
 				
 				System.out.print("Elija una opcion: ");
 				opcion = eleccion.nextInt();
 				
-				switch (opcion) {
+				switch (opcion) /** vee que opcion se eligio y revisa que este dentro de los limites */ {
 					case 1 :
 						admin.listaProyectoTareas();
 						break;
@@ -59,27 +59,39 @@ public class Main {
 						System.out.println(" ");
 				}
 			}
-			if (revisar.getRol().equalsIgnoreCase("Colaborador")) {
+			if (revisar.getRol().equalsIgnoreCase("Colaborador"))/** entra aca en caso que el usuario sea elaborador*/ {
 				Colaborador cola = (Colaborador) revisar;
 				cola.menuColaborador();
-				int opcion = 0;
+				int opcion = eleccion.nextInt();
 				
-				switch (opcion) {
-					case 1 :	
-						break;
-					
-					case 2 :
-						break;
+				switch (opcion)/**vee que opcion se eligio y revisa que este dentro de los limites*/ {
+				case 1 :
+					cola.verTareas();
+					break;
 				
-					case 3:
-						break;
+				case 2 :
+					cola.tareasProyectos();
+					break;
 					
-					default:
-						System.out.println(" ");
-						System.out.println("------------");
-						System.out.println("Opcion invalida");
-						System.out.println("------------");
-						System.out.println(" ");			
+				case 3:
+					cola.cambiarEstado();
+					
+					break;
+				case 4 :
+					cola.aplicarVisitor();
+					
+					break;
+			
+				case 5:
+					revisar = null;
+					break;
+				
+				default:
+					System.out.println(" ");
+					System.out.println("------------");
+					System.out.println("Opcion invalida");
+					System.out.println("------------");
+					System.out.println(" ");			
 				}
 			}
 		}

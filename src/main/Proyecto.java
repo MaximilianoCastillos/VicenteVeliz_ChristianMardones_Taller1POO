@@ -3,7 +3,8 @@ package main;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Proyecto {
+public class Proyecto /** esta clase agrupa las tareas por ejemplo cada vez que se carga una tarea desde un archivo se agrega a su respectivo proyecto, tamien nos 
+permite mostrar las tareas organizadas por proyecto, entonces la clase proyecto es la estructura completa del sistema*/{
 	private String id;
 	private String nombre;
 	private Usuario usuario;
