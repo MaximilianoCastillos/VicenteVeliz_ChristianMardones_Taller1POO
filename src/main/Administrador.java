@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
+import java.time.LocalDate;
 
 /**
  * Clase Administrador que extiende de Usuario. El Administrador tiene  permisos
@@ -286,8 +287,6 @@ public class Administrador extends Usuario {
 			int idProyecto = input.nextInt();
 			input.nextLine();
 			
-			
-			
 			System.out.println();
 			System.out.print("¿De que tipo es su tarea?: ");
 			String tipoTarea = "";
@@ -314,6 +313,20 @@ public class Administrador extends Usuario {
 			
 			System.out.print("Ingrese una descripcion: ");
 			String descripcionTarea = input.nextLine();
+			
+			// === FECHA CON LOCALDATE
+		    java.time.LocalDate fechaLD = null;
+		    while (fechaLD == null) {
+		        System.out.print("Ingrese la fecha (yyyy-MM-dd): ");
+		        String fechaTexto = input.nextLine().trim();
+
+		        try {
+		            fechaLD = java.time.LocalDate.parse(fechaTexto);
+		        } catch (java.time.format.DateTimeParseException e) {
+		            System.out.println("Formato inválido. Ejemplo: 2025-08-01");
+		        }
+		    }
+		    String fechaTarea = fechaLD.toString();
 			
 			String estadoTarea = "";
 			
@@ -379,13 +392,13 @@ public class Administrador extends Usuario {
 				 Tarea nuevaTarea = null;
 				 
 				 if (tipoTarea.equalsIgnoreCase("bug")) {
-					 nuevaTarea = new Bug(idString, tipoTarea, descripcionTarea, estadoTarea, complejidad, null);
+					 nuevaTarea = new Bug(idString, tipoTarea, descripcionTarea, estadoTarea, complejidad, fechaTarea);
 				 }
 				 else if (tipoTarea.equalsIgnoreCase("feature")) {
-					 nuevaTarea = new Feature(idString, tipoTarea, descripcionTarea, estadoTarea, complejidad, null);
+					 nuevaTarea = new Feature(idString, tipoTarea, descripcionTarea, estadoTarea, complejidad, fechaTarea);
 				 }
 				 else {
-					 nuevaTarea = new Documentacion(idString, tipoTarea, descripcionTarea, estadoTarea, complejidad, null);
+					 nuevaTarea = new Documentacion(idString, tipoTarea, descripcionTarea, estadoTarea, complejidad, fechaTarea);
 				 }
 				 
 				 nuevaTarea.setUsuario(usuarioFinal);
@@ -419,13 +432,13 @@ public class Administrador extends Usuario {
 				 Tarea nuevaTarea = null;
 				 
 				 if (tipoTarea.equalsIgnoreCase("bug")) {
-					 nuevaTarea = new Bug(idString, tipoTarea, descripcionTarea, estadoTarea, complejidad, null);
+					 nuevaTarea = new Bug(idString, tipoTarea, descripcionTarea, estadoTarea, complejidad, fechaTarea);
 				 }
 				 else if (tipoTarea.equalsIgnoreCase("feature")) {
-					 nuevaTarea = new Feature(idString, tipoTarea, descripcionTarea, estadoTarea, complejidad, null);
+					 nuevaTarea = new Feature(idString, tipoTarea, descripcionTarea, estadoTarea, complejidad, fechaTarea);
 				 }
 				 else {
-					 nuevaTarea = new Documentacion(idString, tipoTarea, descripcionTarea, estadoTarea, complejidad, null);
+					 nuevaTarea = new Documentacion(idString, tipoTarea, descripcionTarea, estadoTarea, complejidad, fechaTarea);
 				 }
 				 
 				 nuevaTarea.setUsuario(usuarioFinal);
