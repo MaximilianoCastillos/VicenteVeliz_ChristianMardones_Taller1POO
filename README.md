@@ -15,4 +15,4 @@
 - **GitHub:** [Nasas20](https://github.com/Nasas20)
 
 ## ⛹️‍♂️ JavaDoc
-- **Link JavaDoc:** 
+- **JavaDoc:** [Aqui](https://maximilianocastillos.github.io/VicenteVeliz_ChristianMardones_Taller1POO/Taller1/main/package-summary.html)
