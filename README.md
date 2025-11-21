@@ -15,4 +15,4 @@
 - **GitHub:** [Nasas20](https://github.com/Nasas20)
 
 ## ⛹️‍♂️ JavaDoc
-- **Link JavaDoc:** 
+- **LJavaDoc:** (docs/index.html) 
