@@ -1,3 +1,6 @@
+//Vicente Alonso Veliz Veliz | Rut: 22.012.230-1 | Carrera: Ingeneria Civil en Computacion e Informatica
+//Christian Jovanny Mardones Lopez | Rut: 22.026.428-9 | Carrera: Ingeneria Civil en Computacion e Informatica
+
 package main;
 
 import java.io.FileNotFoundException;
@@ -116,3 +119,4 @@ public class Main {
         }
     }
 }
+
