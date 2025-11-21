@@ -56,7 +56,7 @@ public class Main {
                             break;
                         case 6:
                             revisar = null;
-                            break;
+                            continue;
 
                         default:
                             System.out.println(" ");
@@ -65,7 +65,7 @@ public class Main {
                             System.out.println("------------");
                             System.out.println(" ");
                     }
-                } catch (IllegalArgumentException e) {
+                } catch (Exception e) {
                     
                     System.out.println("Entrada inválida, por favor ingrese un número.");
                     eleccion.nextLine(); 
@@ -99,7 +99,7 @@ public class Main {
 
                         case 5:
                             revisar = null;
-                            break;
+                            continue;
 
                         default:
                             System.out.println(" ");
@@ -108,7 +108,7 @@ public class Main {
                             System.out.println("------------");
                             System.out.println(" ");
                     }
-                } catch (InputMismatchException e) {
+                } catch (Exception e) {
                     System.out.println("Entrada inválida, por favor ingrese un número.");
                     eleccion.nextLine(); 
                 }
