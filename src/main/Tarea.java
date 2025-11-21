@@ -1,6 +1,11 @@
 package main;
-
-public abstract class Tarea /** clase base y sus subclases son bug, feature,documentacion*/{
+/**
+ * La clase  Tarea  es abstratca ya que es una tarea general en el sistema.
+ * Las subclases de esta clase son Bug, Feature y Documentacion,
+ *  Una tarea tiene un ID, tipo, descripción, estado, usuario responsable,
+ * complejidad y fecha de creación. Además, está asociada a un proyecto.
+ */
+public abstract class Tarea {
 	private Proyecto proyecto;
 	private String id;
 	private String tipo;
@@ -10,6 +15,17 @@ public abstract class Tarea /** clase base y sus subclases son bug, feature,docu
 	private String complejidad;
 	private String fecha;
 	
+	/**
+     * Constructor de la clase Tarea.
+     * Inicializa una tarea con los valores proporcionados.
+     *
+     * @param id          El ID de la tarea.
+     * @param tipo        El tipo de tarea (Bug, Feature, Documentacion, etc.).
+     * @param descripcion Descripción de la tarea.
+     * @param estado      El estado de la tarea (ej. "pendiente", "en progreso").
+     * @param complejidad La complejidad de la tarea.
+     * @param fecha       La fecha de la tarea.
+     */
 	public Tarea(String id, String tipo, String descripcion, String estado, String complejidad, String fecha) {
 		this.id = id;
 		this.tipo = tipo;
@@ -78,7 +94,12 @@ public abstract class Tarea /** clase base y sus subclases son bug, feature,docu
 	public Usuario getUsuario() {
 		return usuario;
 	}
-	
+	 /**
+     * Obtiene el nombre de usuario del responsable de la tarea.
+     * Si no tiene un responsable asignado, devuelve "Sin responsable".
+     *
+     * @return El nombre de usuario del responsable o "Sin responsable".
+     */
 	public String getUsuarioUsername() {
 		if (this.usuario != null) {
 			return this.usuario.getUsername();
