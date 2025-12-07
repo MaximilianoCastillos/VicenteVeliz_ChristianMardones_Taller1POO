@@ -1,3 +1,0 @@
-admin1|admin123|Administrador
-colab1|1234|Colaborador
-colab2|abcd|Colaborador
