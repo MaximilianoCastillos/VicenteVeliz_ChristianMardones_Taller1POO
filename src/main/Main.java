@@ -1,3 +1,6 @@
+//Vicente Veliz | Carrera: ICCI
+
+
 package main;
 
 import javax.swing.SwingUtilities;
@@ -24,3 +27,4 @@ public class Main {
         });
     }
 }
+
