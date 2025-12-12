@@ -1,45 +1,62 @@
 package main;
+
 /**
- * La clase abstracta `Usuario` representa un usuario genérico en el sistema.
- * Las subclases de `Usuario`, como `Colaborador` y `Administrador`, heredan de esta clase
- * y definen roles específicos y permisos asociados.
+ * Clase abstracta que representa un usuario genérico del sistema.
+ * Define los atributos comunes de los usuarios, como el nombre de usuario, la contraseña y el rol.
  */
-
 public abstract class Usuario {
-	private String username;
-	private String contraseña;
-	private String rol;
-	
-	 /**
-     * Constructor de la clase `Usuario`.
-     * Inicializa un usuario con su nombre de usuario, contraseña y rol.
-     *
-     * @param username   El nombre de usuario del usuario.
-     * @param contraseña La contraseña del usuario.
-     * @param rol        El rol del usuario (ej. "Administrador", "Colaborador").
+    protected String username;
+    protected String password;
+    protected String rol;
+
+    /**
+     * Constructor para crear un usuario.
      */
-	
-	public Usuario(String username, String contraseña, String rol) {
-		this.username = username;
-		this.contraseña = contraseña;
-		this.rol = rol;
-	}
+    public Usuario(String username, String password, String rol) {
+        this.username = username;
+        this.password = password;
+        this.rol = rol;
+    }
 
-	public String getUsername() {
-		return username;
-	}
-
-	public String getContraseña() {
-		return contraseña;
-	}
-
-	public String getRol() {
-		return rol;
-	}
-	  /**
-     * Método abstracto que debe ser implementado por las subclases.
-     * Este método es el que se encarga de mostrar los permisos específicos del usuario,
-     * dependiendo de su rol (Administrador o Colaborador).
+    /**
+     * Obtiene el nombre de usuario.
      */
-    public abstract void mostrarPermisos();
+    public String getUsername() { 
+        return username;
+    }
+
+    /**
+     * Obtiene la contraseña del usuario.
+     */
+    public String getPassword() {
+        return password;
+    }
+
+    /**
+     * Obtiene el rol del usuario.
+     */
+    public String getRol() {
+        return rol;
+    }
+
+    /**
+     * Establece el nombre de usuario.
+     */
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    /**
+     * Establece la contraseña del usuario.
+     */
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    /**
+     * Establece el rol del usuario.
+     */
+    public void setRol(String rol) {
+        this.rol = rol;
+    }
 }
