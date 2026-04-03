@@ -13,6 +13,3 @@
 - **RUT:** 22.026.428-9  
 - **Carrera:** Ingeniería Civil en Informática  
 - **GitHub:** [Nasas20](https://github.com/Nasas20)
-
-## ⛹️‍♂️ JavaDoc
-- **JavaDoc:** [Aqui](https://maximilianocastillos.github.io/VicenteVeliz_ChristianMardones_Taller1POO/Taller1/main/package-summary.html)
