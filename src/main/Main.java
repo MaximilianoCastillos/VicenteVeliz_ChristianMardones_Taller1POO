@@ -1,3 +1,5 @@
+//Nombre: Vicente Alonso Veliz Veliz | Rut: 22.012.230-1 | Carrera: Ingeneria Civil en Informatica
+//Nombre: Christian Jovanny Mardones Lopez | Rut: 22.026.428-9 | Carrera: Ingeneria Civil en Informatica
 package main;
 
 import java.io.BufferedWriter;
