@@ -31,7 +31,7 @@ Estefania;10/03/2026;2;estudiar
 Martin;11/03/2026;5;ser therian
 Catalina;11/03/2026;6;ser Batman por las noches
 Estefania;11/03/2026;3;investigar las cutiemarks
-Martin;12/03/2026;2;programar
+Martin;12/03/2026;43;programar
 Catalina;12/03/2026;3;estudiar
 Estefania;12/03/2026;2;Ver mlp
 Martin;13/03/2026;4;ser therian
@@ -64,10 +64,8 @@ Estefania;21/03/2026;3;investigar las cutiemarks
 Martin;22/03/2026;1;Ver reels
 Catalina;22/03/2026;2;Ver jujutsu
 Estefania;22/03/2026;2;Ver reels
-Martin;23/03/2026;6;ser therian
 Catalina;23/03/2026;5;ser Batman por las noches
 Estefania;23/03/2026;4;investigar las cutiemarks
-Martin;24/03/2026;2;estudiar
 Catalina;24/03/2026;3;programar
 Estefania;24/03/2026;1;Ver mlp
 Martin;25/03/2026;3;ser therian
@@ -198,3 +196,8 @@ Catalina;05/05/2026;1;programar
 Estefania;05/05/2026;2;Ver mlp
 Martin;06/05/2026;5;ser therian
 Catalina;06/05/2026;6;ser Batman por las noches
+Martin;as;12;12
+Martin;12;12;lol
+Martin;dou;-1;lol
+Martin;asas;12;lol
+Martin;de;100;lol

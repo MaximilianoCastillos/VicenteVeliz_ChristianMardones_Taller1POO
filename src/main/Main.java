@@ -60,6 +60,7 @@ public class Main {
 			
 			
 		} catch (Exception e) {
+			System.out.println("error al leer archivo");
 
 		}
 				
@@ -71,12 +72,20 @@ public class Main {
 	while (seguirViendo) {							//menu principal y debemos elegir si nos metemos a "menu usuario" o "menu de analisis" y si no salir 
 			
 				try {
-					System.out.println("1) Menu de Usuarios");
-					System.out.println("2) Menu de Analisis");
-					System.out.println("3) Salir");
-					System.out.print("Ingrese opcion: ");
 					
-					int opcionUsuario = teclado.nextInt();			//preguntamos que opcion desea elegir
+					
+					
+					boolean ver = true;
+					int opcionUsuario;
+					do {
+						System.out.println("1) Menu de Usuarios");
+						System.out.println("2) Menu de Analisis");
+						System.out.println("3) Salir");
+						System.out.print("Ingrese opcion: ");
+						opcionUsuario = teclado.nextInt();
+						
+						
+					} while (opcionUsuario < 0 || opcionUsuario > 4 );
 					
 					switch (opcionUsuario) {
 					
@@ -124,7 +133,14 @@ public class Main {
 										+ "4) Cambiar contraseña.\r\n"
 										+ "5) Salir.\r\n"
 										+ "Ingrese eleccion: ");
-								usuarioEleccion = teclado.nextInt();
+								try {
+									usuarioEleccion = teclado.nextInt();
+								}
+								catch (Exception e){
+									System.out.println("solo valores numericos");
+									teclado.nextLine();
+									usuarioEleccion = -1;
+								}
 								
 								switch (usuarioEleccion) {
 								case 1: //Registrar actividad
@@ -134,9 +150,26 @@ public class Main {
 
 								        System.out.print("Ingrese fecha: ");
 								        String nuevaFecha = teclado.nextLine().strip();
+								        int nuevasHoras = -1;
+								        boolean horasValidas = false;
+								        
+								        while (!horasValidas) {
+								            System.out.print("Ingrese horas validas: ");
+								            try {
+								                nuevasHoras = teclado.nextInt();
 
-								        System.out.print("Ingrese horas: ");
-								        int nuevasHoras = teclado.nextInt();
+								                if (nuevasHoras >= 0) {
+								                    horasValidas = true;
+								                } else {
+								                    System.out.println("Las horas no pueden ser negativas.");
+								                }
+
+								            } catch (Exception e) {
+								                System.out.println("Debe ingresar solo numeros.");
+								                teclado.nextLine();
+								            }
+								        }
+								        
 								        teclado.nextLine();
 
 								        System.out.print("Ingrese actividad: ");
@@ -184,7 +217,19 @@ public class Main {
 									}
 
 									System.out.print("Ingrese eleccion: ");
-									int eleccionModificar = teclado.nextInt();
+									int eleccionModificar;
+									
+									try {
+									    eleccionModificar = teclado.nextInt();
+
+										
+									}
+									catch (Exception e){
+										System.out.println("valores numericos");
+										teclado.nextLine();
+										break;
+									}
+									
 
 									if (eleccionModificar == 0) {
 									    break;
@@ -204,8 +249,17 @@ public class Main {
 									System.out.println("2) Duracion");
 									System.out.println("3) Tipo de actividad");
 									System.out.print("Ingrese eleccion: ");
-									int campoModificar = teclado.nextInt();
-									teclado.nextLine();
+									
+									int campoModificar;
+									try {
+										campoModificar = teclado.nextInt();
+
+									}
+									catch (Exception e){
+										System.out.println("ingrese valores numericos pao ");
+										teclado.nextLine();
+										break;
+									}
 
 									switch (campoModificar) {
 									    case 0:
@@ -220,7 +274,16 @@ public class Main {
 
 									    case 2:
 									        System.out.print("Ingrese nueva duracion: ");
-									        horas[indiceReal] = teclado.nextInt();
+									        
+									        try {
+										        horas[indiceReal] = teclado.nextInt();
+
+									        }
+									        catch(Exception e){
+									        	System.out.println("ingrese valores numericos");
+									            teclado.nextLine();
+									            break;
+									        }
 									        teclado.nextLine();
 									        System.out.println("Duracion modificada con exito!");
 									        guardarRegistros(ides, fechas, horas, actividades, i);
@@ -267,9 +330,22 @@ public class Main {
 									}
 
 									System.out.print("Ingrese eleccion: ");
-									int eleccionEliminar = teclado.nextInt();
+									int eleccionEliminar = -1;
+									try {
+										eleccionEliminar = teclado.nextInt();
+									}catch(Exception e){
+										System.out.println("te falla??");
+										teclado.nextLine();
+										eleccionEliminar = -1;
+										
+									}
+									
 
 									if (eleccionEliminar == 0) {
+									    break;
+									}
+									
+									if (eleccionEliminar == -1) {
 									    break;
 									}
 
@@ -340,7 +416,13 @@ public class Main {
 							System.out.println("5) Salir");
 							System.out.print("Ingrese una opcion: ");
 							
-							analisis = teclado.nextInt();
+							try {
+								analisis = teclado.nextInt();
+							} catch (Exception e) {
+								System.out.println("anda a costarte");
+								teclado.nextLine();
+								analisis = 0;
+							}
 							
 							switch (analisis) {
 								case 1:
@@ -454,11 +536,15 @@ public class Main {
 					case 3:
 						seguirViendo = false;
 						
+					
+						
 					}					
 					
 				} catch (Exception e) {
-					System.out.println("aweoanao");
+					System.out.println("enserio???");
 					System.out.println("hola");
+					teclado.nextLine();
+					
 				}				 
 		}
 		
